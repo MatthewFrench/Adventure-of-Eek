@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Adventure of Eek</title>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/main-window.css">
+    <link rel="stylesheet" href="css/new-game-window.css">
+    <link rel="stylesheet" href="css/character-creator-window.css">
+    <link rel="stylesheet" href="css/items-popover.css">
+    <link rel="stylesheet" href="css/stats-popover.css">
+    <link rel="stylesheet" href="css/event-popover.css">
+    <link rel="stylesheet" href="css/shop-popover.css">
+    <script type="module" src="js/main.js"></script>
+</head>
+<body>
+
+<div class="shop-popover-background-cover" id="shop-popover-background-cover" style="display:none">
+    <div class="shop-popover" id="shop-popover">
+        <div class="shop-title" id="shop-title">Armor Shop</div>
+        <div class="shop-container">
+            <div class="shop-left-pane">
+                <div class="shop-left-top-pane">
+                    <div class="shop-table-header">
+                        <div class="shop-table-rating-column">Rating</div>
+                        <div class="shop-table-item-column">Item Name</div>
+                        <div class="shop-table-cost-column">Cost</div>
+                    </div>
+                    <div class="shop-table-row-container" id="shop-table-row-container"></div>
+                </div>
+                <div class="shop-left-bottom-pane">
+                    <div class="shop-current-armor-title" id="shop-current-armor-title">Current Armor</div>
+                    <div class="shop-current-armor" id="shop-current-armor">Name: Armor Item</div>
+                    <div class="shop-current-armor-count" id="shop-current-armor-count">Rating: 0</div>
+                    <div class="shop-current-armor-value" id="shop-current-armor-value">Worth: 0 Gold</div>
+                </div>
+            </div>
+            <div class="shop-right-pane">
+                <button class="button shop-close-button" id="shop-close-button">Close</button>
+                <div class="shop-gold" id="shop-gold">Gold: 0</div>
+                <button class="button shop-sell-button" id="shop-sell-button">Sell</button>
+                <button class="button shop-buy-button" id="shop-buy-button">Buy</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="event-popover-background-cover" id="event-popover-background-cover" style="display:none">
+    <div class="event-popover" id="event-popover">
+        <div class="event-title" id="event-title">Event Name</div>
+        <div class="event-text" id="event-text">Event Text</div>
+        <button class="button event-close-button" id="event-close-button">Close</button>
+    </div>
+</div>
+
+<div class="stats-popover-background-cover" id="stats-popover-background-cover" style="display:none">
+    <div class="stats-popover" id="stats-popover">
+        <button class="button stats-export-save-button" id="stats-export-save-button">Export Save File</button>
+        <div class="stats-title">Stats</div>
+        <div class="stats-container">
+            <div class="stats-box" id="stats-name">Name: Eek</div>
+        </div>
+        <div class="stats-container">
+            <div class="stats-box" id="stats-level">Level: 0</div>
+            <div class="stats-box" id="stats-experience">Experience: 0</div>
+        </div>
+        <div class="stats-container">
+            <div class="stats-box" id="stats-strength">Strength: 0</div>
+            <div class="stats-box" id="stats-speed">Speed: 0</div>
+            <div class="stats-box" id="stats-health">Health: 0</div>
+        </div>
+        <div class="stats-container">
+            <div class="stats-box" id="stats-armor">Armor: Nothing</div>
+            <div class="stats-box" id="stats-armor-count">Armor Count: 0</div>
+        </div>
+        <div class="stats-container">
+            <div class="stats-box" id="stats-weapon">Weapon: Nothing</div>
+            <div class="stats-box" id="stats-weapon-count">Weapon Count: 0</div>
+        </div>
+        <div class="stats-button-container">
+            <button class="button stats-close-button" id="stats-close-button">Close</button>
+        </div>
+    </div>
+</div>
+
+<div class="items-popover-background-cover" id="items-popover-background-cover" style="display:none">
+    <div class="items-popover" id="items-popover">
+        <div class="items-title">Items</div>
+        <div class="items-container">
+            <div class="item-box" id="item-0"></div>
+            <div class="item-box" id="item-1"></div>
+            <div class="item-box" id="item-2"></div>
+            <div class="item-box" id="item-3"></div>
+            <div class="item-box" id="item-4"></div>
+        </div>
+        <button class="button items-close-button" id="items-close-button">Close</button>
+    </div>
+</div>
+
+<div class="fullWindow new-game-window" id="new-game-window">
+    <div class="textStroke new-game-title">
+        Adventure of Eek!
+    </div>
+    <button class="button new-game-new-button" id="new-game-button">
+        New Game
+    </button>
+    <button class="textStroke button new-game-load-button" id="load-game-button">
+        Load Game
+    </button>
+    <button class="textStroke button new-game-about-button" id="about-game-button">
+        About Game
+    </button>
+</div>
+
+<div class="fullWindow character-creator-window" id="character-creator-window" style="display:none">
+    <div class="textStroke character-creator-window-title">
+        Build your Character!
+    </div>
+    <div class="character-creator-window-name-container">
+        <span>Name: </span>
+        <label>
+            <input class="character-creator-window-name" id="character-creator-window-name" value="Eek"/>
+        </label>
+    </div>
+    <div class="character-creator-window-stats-container">
+        <div class="character-creator-window-stats-title">Stats</div>
+        <hr>
+        <div class="character-creator-window-stats-metric-container">
+            <div class="character-creator-window-stats-metric" id="character-creator-window-strength-metric">Strength: 0</div>
+            <div class="character-creator-window-stats-metric" id="character-creator-window-speed-metric">Speed: 0</div>
+            <div class="character-creator-window-stats-metric" id="character-creator-window-health-metric">Health: 0</div>
+        </div>
+        <hr>
+        <button class="textStroke button character-creator-window-stats-reroll-button" id="character-creator-window-stats-reroll-button">Re-roll</button>
+    </div>
+    <button id="character-creator-window-go-button" class="textStroke button character-creator-window-go-button">
+        Go!
+    </button>
+</div>
+
+<div class="fullWindow main-window" id="main-window" style="display:none">
+    <div class="main-window-top">
+        <div class="main-window-gameview">
+
+        </div>
+        <div class="main-window-statview">
+            <div class="textStroke main-window-statview-title">
+                Adventure of Eek
+            </div>
+            <div class="main-window-statview-stat">
+                Health: 0/0
+            </div>
+            <div class="main-window-statview-stat">
+                Experience: 0
+            </div>
+            <div class="main-window-statview-stat">
+                Level: 0
+            </div>
+            <div class="main-window-statview-stat">
+                Gold: 0
+            </div>
+            <button class="textStroke button main-window-statview-item-button" id="itemsButton">
+                Items
+            </button>
+            <button class="textStroke button main-window-statview-stats-button" id="statsButton">
+                Stats
+            </button>
+        </div>
+    </div>
+    <div class="main-window-text" id="mainTextDiv">
+
+    </div>
+</div>
+
+</body>
+</html>

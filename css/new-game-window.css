@@ -1,0 +1,21 @@
+.new-game-window {
+    background: #ffcd85;
+}
+.new-game-title {
+    flex: 1;
+    color: white;
+    font-family: Chalkboard, serif;
+    width: 100%;
+    text-align: center;
+    font-size: 10vh;
+    margin-top: 3%;
+    margin-bottom: 2%;
+}
+
+.new-game-new-button,
+.new-game-load-button,
+.new-game-about-button {
+    flex: 1;
+    margin-bottom: 5%;
+    font-size: 7vh;
+}

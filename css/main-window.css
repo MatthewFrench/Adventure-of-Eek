@@ -1,0 +1,53 @@
+.main-window {
+
+}
+.main-window-top {
+    display: flex;
+    flex: 3;
+}
+.main-window-gameview {
+    flex: 2;
+    border: solid 1px black;
+    padding: 5px;
+}
+.main-window-statview {
+    margin-left: 5px;
+    flex: 1;
+    border: solid 1px black;
+    background-color: #32271b;
+    display: flex;
+    flex-direction: column;
+}
+.main-window-statview-title {
+    flex: 1;
+    color: white;
+    font-family: Chalkboard, serif;
+    width: 100%;
+    text-align: center;
+    font-size: 5vh;
+}
+.main-window-statview-stat {
+    flex: 1;
+    color: white;
+    font-size: 4vh;
+    margin-left: 5%
+}
+.main-window-statview-item-button {
+    flex: 1;
+    margin-bottom: 3%;
+}
+.main-window-statview-stats-button {
+    flex: 1;
+    margin-bottom: 3%;
+}
+.main-window-text {
+    flex: 1;
+    padding: 10px;
+    border: solid 1px black;
+    max-height: 150px;
+    background: orange;
+    white-space: pre;
+    display: inline-flex;
+    overflow-y: auto;
+    font-size: 3vh;
+}
