@@ -14,7 +14,7 @@ export class EventPopover {
      * Example:
      * "Level up!"
         "You have leveled up to level " + 5 + "!" + "\n\n" +
-        "Your strength has increased!")
+        "Your strength has increased!"
      */
     set(title, text) {
         this.titleDiv.innerText = title;

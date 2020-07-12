@@ -5,6 +5,7 @@ import {ItemsPopover} from "./items-popover.js";
 import {StatsPopover} from "./stats-popover.js";
 import {EventPopover} from "./event-popover.js";
 import {ShopPopover} from "./shop-popover.js";
+import {AttackPopover} from "./attack-popover.js";
 
 export class Game {
     constructor() {
@@ -15,6 +16,7 @@ export class Game {
         this.statsPopover = new StatsPopover(this);
         this.eventPopover = new EventPopover(this);
         this.shopPopover = new ShopPopover(this);
+        this.attackPopover = new AttackPopover(this);
     }
 
     print(text) {

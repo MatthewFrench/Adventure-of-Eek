@@ -11,7 +11,7 @@
     width: min(80vh, 80vw);
     left: calc(50vw - min(40vh, 40vw));
     height: min(65vw, 65vh);
-    top: min(15vw, 15vh);
+    top: min(10vw, 10vh);
     border: solid 1px black;
     background: #ffdbad;
     display: flex;

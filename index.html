@@ -11,9 +11,28 @@
     <link rel="stylesheet" href="css/stats-popover.css">
     <link rel="stylesheet" href="css/event-popover.css">
     <link rel="stylesheet" href="css/shop-popover.css">
+    <link rel="stylesheet" href="css/attack-popover.css">
     <script type="module" src="js/main.js"></script>
 </head>
 <body>
+
+<div class="attack-popover-background-cover" id="attack-popover-background-cover" style="display:none">
+    <div class="attack-popover" id="attack-popover">
+        <div class="attack-enemy-information-container">
+            <div class="attack-enemy-image" id="attack-enemy-image"></div>
+            <div class="attack-enemy-text-information">
+                <div class="attack-enemy-name" id="attack-enemy-name">Baby Chicken</div>
+                <div class="attack-enemy-health" id="attack-enemy-health">HP: 0 / 0</div>
+            </div>
+        </div>
+        <div class="attack-self-information-container" id="attack-self-information-container">You:   HP: 0 / 0</div>
+        <div class="attack-controls-container">
+            <button class="button attack-attack-button" id="attack-attack-button">Attack</button>
+            <button class="button attack-run-button" id="attack-run-button">Run</button>
+            <button class="button attack-items-button" id="attack-items-button">Items</button>
+        </div>
+    </div>
+</div>
 
 <div class="shop-popover-background-cover" id="shop-popover-background-cover" style="display:none">
     <div class="shop-popover" id="shop-popover">
@@ -164,6 +183,15 @@
             </button>
             <button class="textStroke button main-window-statview-stats-button" id="statsButton">
                 Stats
+            </button>
+            <button class="textStroke button main-window-statview-stats-button" id="shopButton">
+                Shop
+            </button>
+            <button class="textStroke button main-window-statview-stats-button" id="levelUpButton">
+                Level Up Event
+            </button>
+            <button class="textStroke button main-window-statview-stats-button" id="attackButton">
+                Attack
             </button>
         </div>
     </div>
