@@ -7,6 +7,16 @@ export class NewGameWindow {
             this.hide()
             this.game.characterCreatorWindow.show()
         }
+        this.loadGameButton = document.getElementById("load-game-button")
+        this.loadGameButton.onclick = () => {
+            this.hide()
+            this.game.loadWindow.show()
+        }
+        this.aboutButton = document.getElementById("about-game-button")
+        this.aboutButton.onclick = () => {
+            this.hide()
+            this.game.aboutWindow.show()
+        }
     }
     show() {
         this.window.style.display = ""

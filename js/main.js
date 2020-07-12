@@ -6,11 +6,15 @@ import {StatsPopover} from "./stats-popover.js";
 import {EventPopover} from "./event-popover.js";
 import {ShopPopover} from "./shop-popover.js";
 import {AttackPopover} from "./attack-popover.js";
+import {AboutWindow} from "./about-window.js";
+import {LoadGameWindow} from "./load-game-window.js";
 
 export class Game {
     constructor() {
         this.mainWindow = new MainWindow(this);
         this.newGameWindow = new NewGameWindow(this);
+        this.loadWindow = new LoadGameWindow(this);
+        this.aboutWindow = new AboutWindow(this);
         this.characterCreatorWindow = new CharacterCreatorWindow(this);
         this.itemsPopover = new ItemsPopover(this);
         this.statsPopover = new StatsPopover(this);
