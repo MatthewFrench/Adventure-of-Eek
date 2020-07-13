@@ -9,23 +9,27 @@
     text-align: center;
     font-size: min(8vh, 8vw);
     margin-top: min(3vh, 3vw);
-    margin-bottom: min(2vh, 2vw);
 }
 .load-game-container {
     flex: 1;
-    margin: min(5vh, 5vw);
+    margin: min(2vh, 2vw) min(5vh, 5vw);
     font-size: min(6vh, 5vw);
-    white-space: pre-line;
+    border-bottom: solid 2px black;
+    border-top: solid 2px black;
+    overflow: auto;
 }
 .load-game-back-button {
     margin-bottom: min(5vh, 5vw);
     font-size: min(7vh, 7vw);
 }
 .load-game-import-button {
-    
+    margin-bottom: min(1vh, 1vw)
 }
 .load-game-item {
-
+    border: solid 1px black;
+    width: 100%;
+    margin: min(0.5vh, 0.5vw) 0;
+    background-color: #828282;
 }
 .load-game-item-name {
 
