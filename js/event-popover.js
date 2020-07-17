@@ -16,9 +16,11 @@ export class EventPopover {
         "You have leveled up to level " + 5 + "!" + "\n\n" +
         "Your strength has increased!"
      */
-    set(title, text) {
+    set(title, text, buttonText, onClick) {
         this.titleDiv.innerText = title;
         this.textDiv.innerText = text;
+        this.closeButton.innerText = buttonText;
+        this.closeButton.onclick = onClick;
     }
     show() {
         this.popover.style.display = "";

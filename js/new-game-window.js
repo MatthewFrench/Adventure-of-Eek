@@ -5,7 +5,25 @@ export class NewGameWindow {
         this.newGameButton = document.getElementById("new-game-button")
         this.newGameButton.onclick = () => {
             this.hide()
+
+            this.game.eventPopover.set("Intro",
+                "The town of Oof has been mysteriously overgrown with plant life. The plant life is blocking all routes out of the town.",
+                "Next",
+                () => {
+                    this.game.eventPopover.set("Intro Continued",
+                        "The town tried to clear the plants but they would only regrow the next day.",
+                        "Next",
+                        () => {
+                            this.game.eventPopover.set("Intro Final",
+                                "The town is sick of all the yard work so they are sending you on the adventure of freeing the town. They have cleared and used weed killer on one area to the East.\n\nBe careful, the overgrowth appears to be affecting the wildlife as well!",
+                                "Let's Go!",
+                                () => {
+                                    this.game.eventPopover.hide()
+                                })
+                        })
+                })
             this.game.characterCreatorWindow.show()
+            this.game.eventPopover.show()
         }
         this.loadGameButton = document.getElementById("load-game-button")
         this.loadGameButton.onclick = () => {
