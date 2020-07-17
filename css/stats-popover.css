@@ -9,10 +9,10 @@
 .stats-popover {
     position: absolute;
     width: min(80vh, 80vw);
-    left: calc(50vw - min(40vh, 40vw));
+    left: calc(50vw - min(40vh, 40vw) - min(0.5vh, 0.5vw));
     height: min(40vw, 40vh);
-    top: min(15vw, 15vh);
-    border: solid 1px black;
+    top: calc(min(15vw, 15vh) - min(0.5vh, 0.5vw));
+    border: solid min(0.5vh, 0.5vw) black;
     background: #ffdbad;
     display: flex;
     flex-direction: column;
@@ -32,8 +32,19 @@
     flex-direction: column;
     flex-flow: wrap;
 }
+.stats-container-level-experience {
+    border-bottom: solid min(0.1vh, 0.1vw) black;
+}
+.stats-container-metrics {
+    border-bottom: solid min(0.1vh, 0.1vw) black;
+}
 .stats-box {
     font-size: min(3vh, 3vw);
+    margin: auto;
+}
+.stats-name {
+    font-size: min(3.5vh, 3.5vw);
+    text-decoration: underline;
 }
 .stats-button-container {
     text-align: center;

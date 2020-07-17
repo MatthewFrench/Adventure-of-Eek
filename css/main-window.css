@@ -7,13 +7,12 @@
 }
 .main-window-gameview {
     flex: 2;
-    border: solid 1px black;
-    padding: 5px;
+    border: solid min(0.25vh, 0.25vw) black;
+    padding: min(1vh, 1vw);
 }
 .main-window-statview {
-    margin-left: 5px;
     flex: 1;
-    border: solid 1px black;
+    border: solid min(0.25vh, 0.25vw) black;
     background-color: #32271b;
     display: flex;
     flex-direction: column;
@@ -24,30 +23,29 @@
     font-family: Chalkboard, serif;
     width: 100%;
     text-align: center;
-    font-size: 5vh;
+    font-size: min(5vh, 5vw);
 }
 .main-window-statview-stat {
     flex: 1;
     color: white;
-    font-size: 4vh;
-    margin-left: 5%
+    font-size: min(4vh, 4vw);
+    margin-left: min(2vh, 2vw);
 }
 .main-window-statview-item-button {
     flex: 1;
-    margin-bottom: 3%;
+    margin-bottom: min(1vh, 1vw);
 }
 .main-window-statview-stats-button {
     flex: 1;
-    margin-bottom: 3%;
+    margin-bottom: min(1vh, 1vw);
 }
 .main-window-text {
     flex: 1;
-    padding: 10px;
-    border: solid 1px black;
-    max-height: 150px;
+    padding: min(1.5vh, 1.5vw);
+    border: solid min(0.25vh, 0.25vw) black;
     background: orange;
     white-space: pre;
     display: inline-flex;
     overflow-y: auto;
-    font-size: 3vh;
+    font-size: min(3vh, 3vw);
 }

@@ -9,10 +9,10 @@
 .attack-popover {
     position: absolute;
     width: min(80vh, 80vw);
-    left: calc(50vw - min(40vh, 40vw));
+    left: calc(50vw - min(40vh, 40vw) - min(0.5vh, 0.5vw));
     height: min(40vw, 40vh);
-    top: min(15vw, 15vh);
-    border: solid 1px black;
+    top: calc(min(15vw, 15vh) - min(0.5vh, 0.5vw));
+    border: solid min(0.5vh, 0.5vw) black;
     background: #ffdbad;
     z-index: 10;
     display: flex;
@@ -51,8 +51,8 @@
 .attack-self-information-container {
     margin: min(2vh, 2vw);
     font-size: min(6vh, 6vw);
-    padding-top: min(1.5vh, 1.5vw);
-    padding-bottom: min(1.5vh, 1.5vw);
+    padding-top: min(1vh, 1vw);
+    padding-bottom: min(1vh, 1vw);
     white-space: pre;
 }
 .attack-controls-container {

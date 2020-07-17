@@ -9,10 +9,10 @@
 .shop-popover {
     position: absolute;
     width: min(80vh, 80vw);
-    left: calc(50vw - min(40vh, 40vw));
+    left: calc(50vw - min(40vh, 40vw) - min(0.5vh, 0.5vw));
     height: min(65vw, 65vh);
-    top: min(10vw, 10vh);
-    border: solid 1px black;
+    top: calc(min(10vw, 10vh) - min(0.5vh, 0.5vw));
+    border: solid min(0.5vh, 0.5vw) black;
     background: #ffdbad;
     display: flex;
     flex-direction: column;
@@ -35,7 +35,7 @@
     flex-direction: column;
 }
 .shop-left-top-pane {
-    border: solid 1px black;
+    border: solid min(0.25vh, 0.25vw) black;
     background-color: white;
     margin: min(1vh, 1vw);
     max-height: min(30vh, 30vw);
@@ -48,11 +48,10 @@
     margin-right: min(2vh, 2vw);
     display: flex;
     flex-direction: column;
-    margin-bottom: min(1vh, 1vw);
 }
 .shop-current-armor-title {
     width: 100%;
-    text-align: center;
+    text-align: left;
     text-decoration: underline;
     font-size: min(3vh, 3vw);
 }

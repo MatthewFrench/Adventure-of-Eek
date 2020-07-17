@@ -7,35 +7,35 @@
     font-family: Chalkboard, serif;
     width: 100%;
     text-align: center;
-    font-size: 7vh;
-    margin-top: 2vh;
-    max-height: 13vh;
+    font-size: min(7vh, 7vw);
+    margin-top: min(2vh, 2vw);
+    max-height: min(13vh, 13vw);
 }
 .character-creator-window-name-container {
     flex: 1;
     width: 100%;
     text-align: center;
-    font-size: 5vh;
-    max-height: 10vh;
+    font-size: min(5vh, 5vw);
+    max-height: min(10vh, 10vw);
 }
 .character-creator-window-stats-container {
     flex: 1;
-    font-size: 5vh;
+    font-size: min(5vh, 5vw);
     width: 100%;
-    margin-top: 2%;
+    margin-top: min(2vh, 2vw);
 }
 .character-creator-window-go-button {
-    margin-bottom: 2vh;
-    font-size: 5vh;
+    margin-bottom: min(2vh, 2vw);
+    font-size: min(5vh, 5vw);
 }
 .character-creator-window-name {
-    width: 55%;
-    font-size: 5vh;
+    width: min(65vh, 65vw);
+    font-size: min(5vh, 5vw);
 }
 .character-creator-window-stats-title {
-    font-size: 6vh;
-    margin-bottom: 1vh;
-    margin-left: 5%;
+    font-size: min(6vh, 6vw);
+    margin-bottom: min(1vh, 1vw);
+    margin-left: min(5vh, 5vw);
 }
 .character-creator-window-stats-metric-container {
     display: flex;
@@ -47,8 +47,8 @@
 }
 .character-creator-window-stats-reroll-button {
     text-align: center;
-    font-size: 6vh;
-    padding-left: 2vh;
-    padding-right: 2vh;
+    font-size: min(6vh, 6vw);
+    padding-left: min(2vh, 2vw);
+    padding-right: min(2vh, 2vw);
     display: block;
 }

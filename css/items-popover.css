@@ -9,14 +9,14 @@
 .items-popover {
     position: absolute;
     width: min(70vh, 70vw);
-    left: calc(50vw - min(35vh, 35vw));
+    left: calc(50vw - min(35vh, 35vw) - min(0.5vh, 0.5vw));
     height: min(30vw, 30vh);
-    top: min(25vw, 25vh);
-    border: solid 1px black;
+    top: calc(min(25vw, 25vh) - min(0.5vh, 0.5vw));
+    border: solid min(0.5vh, 0.5vw) black;
     background: #ffdbad;
     display: flex;
     flex-direction: column;
-    z-index: 10;
+    z-index: 11;
 }
 .items-title {
     width: 100%;
@@ -39,7 +39,7 @@
 }
 .item-box {
     flex: 1;
-    border: solid 1px black;
+    border: solid min(0.4vh, 0.4vw) black;
     margin-top: min(1vh, 1vw);
     margin-left: min(1vh, 1vw);
     max-width: min(11vw, 11vh);
