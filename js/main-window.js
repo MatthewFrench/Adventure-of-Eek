@@ -1,3 +1,5 @@
+import {AppendExperience} from "./models/LevelUpData.js";
+
 export class MainWindow {
     constructor(game) {
         this.game = game;
@@ -34,14 +36,7 @@ export class MainWindow {
         }
 
         document.getElementById("levelUpButton").onclick = ()  => {
-            this.game.eventPopover.set("Level up!",
-            "You have leveled up to level " + 5 + "!" + "\n\n" +
-            "Your strength has increased!",
-                "Yay!",
-                () => {
-                this.game.eventPopover.hide()
-             })
-            this.game.eventPopover.show()
+            AppendExperience(1000, this.game);
         }
 
         document.getElementById("attackButton").onclick = () => {
