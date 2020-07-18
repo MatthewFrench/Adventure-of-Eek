@@ -2,10 +2,10 @@ export class CharacterCreatorWindow {
     constructor(game) {
         this.game = game;
         this.window = document.getElementById("character-creator-window")
+        this.nameInput = document.getElementById("character-creator-window-name")
         this.goButton = document.getElementById("character-creator-window-go-button")
         this.goButton.onclick = () => {
-            this.hide()
-            this.game.mainWindow.show()
+            this.createNewGame()
         }
         this.rerollButton = document.getElementById("character-creator-window-stats-reroll-button")
         this.rerollButton.onclick = () => {
@@ -18,6 +18,11 @@ export class CharacterCreatorWindow {
         this.health = 0
         this.speed = 0
         this.rerollStats()
+    }
+    createNewGame() {
+        this.game.createNewGame(this.nameInput.innerText, this.strength, this.speed, this.health)
+        this.hide()
+        this.game.mainWindow.show()
     }
     rerollStats() {
         this.setStrength(8 + Math.floor(Math.random() * 8));

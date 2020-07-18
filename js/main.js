@@ -8,9 +8,13 @@ import {ShopPopover} from "./shop-popover.js";
 import {AttackPopover} from "./attack-popover.js";
 import {AboutWindow} from "./about-window.js";
 import {LoadGameWindow} from "./load-game-window.js";
+import {GlobalData} from "./models/GlobalData.js";
+import {GameData} from "./models/GameData.js";
+import {ITEM_SUSHI} from "./models/ItemData.js";
 
 export class Game {
     constructor() {
+        this.globalData = new GlobalData();
         this.mainWindow = new MainWindow(this);
         this.newGameWindow = new NewGameWindow(this);
         this.loadWindow = new LoadGameWindow(this);
@@ -21,6 +25,25 @@ export class Game {
         this.eventPopover = new EventPopover(this);
         this.shopPopover = new ShopPopover(this);
         this.attackPopover = new AttackPopover(this);
+    }
+
+    createNewGame(name, strength, speed, health) {
+        let newGame = new GameData();
+        newGame.name = name;
+        newGame.strength = parseInt(strength);
+        newGame.speed = parseInt(speed);
+        newGame.health = parseInt(health);
+        newGame.currentHealth = parseInt(health);
+        newGame.level = 1;
+        newGame.gold = 100;
+        newGame.items.push(ITEM_SUSHI);
+        newGame.items.push(ITEM_SUSHI);
+        this.globalData.currentGame = newGame;
+        this.globalData.games.push(newGame);
+    }
+
+    getCurrentGame() {
+        return this.globalData.currentGame;
     }
 
     print(text) {

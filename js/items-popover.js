@@ -1,10 +1,10 @@
-const ITEM_NONE = {itemName: "", itemImage: ""}
-const ITEM_SUSHI = {itemName: "Sushi", itemImage: "sushi.png"}
+import {UseItem} from "./models/ItemData.js";
+
 export class ItemsPopover {
     constructor(game) {
         this.game = game
-        this.popover = document.getElementById("items-popover-background-cover")
-        this.closeButton = document.getElementById("items-close-button")
+        this.popover = document.getElementById("items-popover-background-cover");
+        this.closeButton = document.getElementById("items-close-button");
         this.closeButton.onclick = () => {
             this.hide()
         }
@@ -15,44 +15,43 @@ export class ItemsPopover {
             document.getElementById("item-3"),
             document.getElementById("item-4")
         ];
-        this.items = [];
+        // Set on click events for each item div
         for (const itemIndex in this.itemDivs) {
             if (this.itemDivs.hasOwnProperty(itemIndex)) {
-                this.items.push(ITEM_NONE);
-                const item = this.itemDivs[itemIndex]
-                item.onclick = () => {
-                    this.itemClicked(itemIndex)
+                const itemDiv = this.itemDivs[itemIndex];
+                itemDiv.onclick = () => {
+                    this.itemClicked(itemIndex);
                 }
             }
         }
-        this.setItem(0, ITEM_SUSHI)
-        this.setItem(1, ITEM_SUSHI)
-        this.setItem(2, ITEM_SUSHI)
-        this.setItem(3, ITEM_SUSHI)
     }
-    itemClicked(itemNumber) {
-        const item = this.items[itemNumber]
-        if (item.itemName === "") {
+    itemClicked(itemIndex) {
+        const item = itemIndex < this.game.getCurrentGame().items.length ? this.game.getCurrentGame().items[itemIndex] : null;
+        if (item === null) {
             return;
         }
-        this.game.print("You ate " + item.itemName.toLowerCase() + ". It was delicious.")
-        this.setItem(itemNumber, ITEM_NONE)
+        UseItem(item, this.game);
+        this.game.getCurrentGame().items.splice(itemIndex, 1);
+        this.updateItemDisplay();
     }
-    setItem(itemNumber, itemInfo) {
-        this.items[itemNumber] = itemInfo
-        const itemDiv = this.itemDivs[itemNumber]
-        if (itemInfo.itemImage === "") {
-            itemDiv.style.backgroundImage = ""
-            itemDiv.style.cursor = "";
-        } else {
-            itemDiv.style.cursor = "pointer";
-            itemDiv.style.backgroundImage = "url(\"./images/" + itemInfo.itemImage +"\")"
+    updateItemDisplay() {
+        for (const itemIndex in this.itemDivs) {
+            const itemDiv = this.itemDivs[itemIndex];
+            const item = itemIndex < this.game.getCurrentGame().items.length ? this.game.getCurrentGame().items[itemIndex] : null;
+            if (item === null) {
+                itemDiv.style.backgroundImage = "";
+                itemDiv.style.cursor = "";;
+            } else {
+                itemDiv.style.cursor = "pointer";
+                itemDiv.style.backgroundImage = "url(\"./images/" + item.itemImage +"\")";
+            }
         }
     }
     show() {
-        this.popover.style.display = ""
+        this.updateItemDisplay();
+        this.popover.style.display = "";
     }
     hide() {
-        this.popover.style.display = "none"
+        this.popover.style.display = "none";
     }
 }
