@@ -10,7 +10,7 @@ function GetExperienceForLevel(level) {
             return experience;
         }
     }
-    let experience = GetExperienceForLevel(level - 2) * INCREASE_MULTIPLIER + GetExperienceForLevel(level - 1);
+    let experience = Math.floor(GetExperienceForLevel(level - 2) * INCREASE_MULTIPLIER + GetExperienceForLevel(level - 1));
     LEVEL_EXPERIENCE_CACHE[level] = experience;
     return experience;
 }
