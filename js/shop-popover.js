@@ -1,19 +1,3 @@
-/*
-Armor
-        this.game.shopPopover.setTitle("Armor Shop")
-        this.game.shopPopover.addItem("Cardboard Underwear", 1, 25)
-        this.game.shopPopover.addItem("Crocheted Crocs", 2, 60)
-        this.game.shopPopover.addItem("Carpet T-Shirt", 3, 140)
-        this.game.shopPopover.addItem("Wood Pants", 4, 330)
-        this.game.shopPopover.addItem("Shiny Nightgown", 5, 470)
-        this.game.shopPopover.addItem("Christmas Light Up Socks", 6, 820)
-        this.game.shopPopover.addItem("Adamantium Nose-ring", 8, 1210)
-        this.game.shopPopover.addItem("Dried Dog-turd Suit", 10, 1650)
-        this.game.shopPopover.addItem("Towel of Indecency", 12, 2150)
-        this.game.shopPopover.addItem("Yellow Polka-dot Bikini", 14, 3100)
-        this.game.shopPopover.addItem("Dragon Scale Full Body Armor", 16, 6400)
-        this.game.shopPopover.show()
- */
 export class ShopPopover {
     constructor(game) {
         this.game = game
@@ -35,7 +19,19 @@ export class ShopPopover {
     setTitle(title) {
         this.title.innerText = title
     }
-    addItem(name, rating, cost) {
+    setItems(items) {
+        // Clear items
+        while(this.rowContainer.firstChild) {
+            this.rowContainer.removeChild(this.rowContainer.firstChild);
+        }
+        for (const item of items) {
+            this.addItem(item);
+        }
+    }
+    addItem(item) {
+        let name = item.name;
+        let rating = item.rating;
+        let cost = item.cost;
         let rowDiv = document.createElement("div")
         rowDiv.className = "shop-table-row"
         let ratingDiv = document.createElement("div")
@@ -61,5 +57,7 @@ export class ShopPopover {
         }
         this.selectedItemDiv = rowDiv
         this.selectedItemDiv.classList.add("selected");
+        // Track which item is active
+        //todo
     }
 }
