@@ -45,4 +45,13 @@
     max-width: min(11vw, 11vh);
     max-height: min(11vw, 11vh);
     background-size: contain;
+    position: relative;
+}
+.item-box-name {
+    width: 100%;
+    text-align: center;
+    font-size: min(2vh, 2vw);
+    position: absolute;
+    top: max(-2.55vh, -2.55vw);
+    left: 0;
 }
