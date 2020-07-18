@@ -20,7 +20,7 @@ export class CharacterCreatorWindow {
         this.rerollStats()
     }
     createNewGame() {
-        this.game.createNewGame(this.nameInput.innerText, this.strength, this.speed, this.health)
+        this.game.createNewGame(this.nameInput.value, this.strength, this.speed, this.health)
         this.hide()
         this.game.mainWindow.show()
     }
