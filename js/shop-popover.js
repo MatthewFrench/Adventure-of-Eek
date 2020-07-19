@@ -28,7 +28,7 @@ export class ShopPopover {
     }
     setShopType(shopType) {
         this.title.innerText = shopType + " Shop";
-        this.currentArmorTitle.innerText = "Current" + shopType;
+        this.currentArmorTitle.innerText = "Current " + shopType;
     }
     setItems(items, currentItem) {
         let currentItemRating = 0;

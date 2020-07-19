@@ -10,7 +10,7 @@
     position: absolute;
     width: min(80vh, 80vw);
     left: calc(50vw - min(40vh, 40vw) - min(0.5vh, 0.5vw));
-    height: min(40vw, 40vh);
+    height: min(42vw, 42vh);
     top: calc(min(15vw, 15vh) - min(0.5vh, 0.5vw));
     border: solid min(0.5vh, 0.5vw) black;
     background: #ffdbad;
@@ -51,6 +51,7 @@
 }
 .stats-close-button {
     margin-bottom: min(1vh, 1vw);
+    margin-top: min(1vh, 1vw);
 }
 .stats-export-save-button {
     position: absolute;

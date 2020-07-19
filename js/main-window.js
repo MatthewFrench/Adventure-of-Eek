@@ -1,5 +1,6 @@
 import {AppendExperience} from "./models/LevelUpData.js";
 import {ShowArmorShop} from "./models/ArmorData.js";
+import {ShowWeaponShop} from "./models/WeaponData.js";
 
 export class MainWindow {
     constructor(game) {
@@ -18,8 +19,11 @@ export class MainWindow {
         this.experienceDiv = document.getElementById( "main-window-statview-stat-experience")
         this.levelDiv = document.getElementById( "main-window-statview-stat-level")
         this.goldDiv = document.getElementById( "main-window-statview-stat-gold")
-        document.getElementById("shopButton").onclick = () => {
+        document.getElementById("armorShopButton").onclick = () => {
             ShowArmorShop(this.game);
+        }
+        document.getElementById("weaponShopButton").onclick = () => {
+            ShowWeaponShop(this.game);
         }
         document.getElementById("levelUpButton").onclick = ()  => {
             AppendExperience(1000, this.game);
