@@ -1,6 +1,7 @@
 import {AppendExperience} from "./models/LevelUpData.js";
 import {ShowArmorShop} from "./models/ArmorData.js";
 import {ShowWeaponShop} from "./models/WeaponData.js";
+import {CREATURE_BABY_CHICKEN} from "./models/CreatureData.js";
 
 export class MainWindow {
     constructor(game) {
@@ -29,7 +30,7 @@ export class MainWindow {
             AppendExperience(1000, this.game);
         }
         document.getElementById("attackButton").onclick = () => {
-            this.game.attackPopover.set("baby-chicken.png", "Baby Chicken", 10, 13)
+            this.game.attackPopover.prepareBattle(CREATURE_BABY_CHICKEN);
             this.game.attackPopover.show()
         }
     }

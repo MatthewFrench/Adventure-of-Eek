@@ -31,6 +31,7 @@ export class ItemsPopover {
                 }
             }
         }
+        this.useCallback = null;
     }
     itemClicked(itemIndex) {
         const item = itemIndex < this.game.getCurrentGame().items.length ? this.game.getCurrentGame().items[itemIndex] : null;
@@ -40,6 +41,9 @@ export class ItemsPopover {
         UseItem(item, this.game);
         this.game.getCurrentGame().items.splice(itemIndex, 1);
         this.updateItemDisplay();
+        if (this.useCallback != null) {
+            this.useCallback();
+        }
     }
     updateItemDisplay() {
         for (const itemIndex in this.itemDivs) {
@@ -57,7 +61,8 @@ export class ItemsPopover {
             }
         }
     }
-    show() {
+    show(useCallback = null) {
+        this.useCallback = useCallback;
         this.updateItemDisplay();
         this.popover.style.display = "";
     }

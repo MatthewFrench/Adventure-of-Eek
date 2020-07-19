@@ -15,24 +15,33 @@ export class AttackPopover {
         this.enemyNameDiv = document.getElementById("attack-enemy-name")
         this.enemyHealthDiv = document.getElementById("attack-enemy-health")
         this.selfHealthDiv = document.getElementById("attack-self-information-container")
+        // Enemy creature data
+        this.enemy = null;
+        // Enemy modifiable stats
+        this.enemyHealth = 0;
+        this.enemyCurrentHealth = 0;
     }
-    set(enemyImage, enemyName, enemyHp, yourHp) {
-        this.enemyImage.style.backgroundImage = "url(\"./images/" + enemyImage +"\")"
-        this.enemyNameDiv.innerText = enemyName
-        this.updateEnemyHealth(enemyHp, enemyHp)
-        this.updateSelfHealth(yourHp, yourHp)
+    prepareBattle(enemyCreatureData) {
+        this.enemy = enemyCreatureData;
+        this.enemyHealth = enemyCreatureData.health;
+        this.enemyCurrentHealth = enemyCreatureData.health;
+        this.enemyImage.style.backgroundImage = "url(\"./images/" + enemyCreatureData.image +"\")";
+        this.enemyNameDiv.innerText = enemyCreatureData.name;
+        this.updateHealthDisplays();
     }
-    updateEnemyHealth(currentHealth, maximumHealth) {
-        this.enemyHealthDiv.innerText = "HP: " + currentHealth + " / " + maximumHealth
-    }
-    updateSelfHealth(currentHealth, maximumHealth) {
-        this.selfHealthDiv.innerText = "You:   HP: " + currentHealth +" / " + maximumHealth
+    updateHealthDisplays() {
+        let currentGame = this.game.getCurrentGame();
+        this.enemyHealthDiv.innerText = "HP: " + this.enemyCurrentHealth + " / " + this.enemyHealth;
+        this.selfHealthDiv.innerText = "You:   HP: " + currentGame.currentHealth +" / " + currentGame.health;
     }
     attackClicked() {
 
     }
     itemClicked() {
-
+        this.game.itemsPopover.show(() => this.usedItem());
+    }
+    usedItem() {
+        this.updateHealthDisplays();
     }
     runClicked() {
         this.hide()
