@@ -15,6 +15,7 @@ body {
     border-radius: min(1vh, 1vw);
     outline: white;
     white-space: nowrap;
+    user-select: none;
 }
 .button:active {
     background-color: #3e3131;

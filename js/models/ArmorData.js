@@ -1,18 +1,55 @@
-const ARMOR_CARDBOARD_UNDERWEAR = {name: "Cardboard Underwear", rating: 1, cost: 25};
-const ARMOR_CROCHETED_CROCS = {name: "Crocheted Crocs", rating: 2, cost: 60};
-const ARMOR_CARPET_TSHIRT = {name: "Carpet T-Shirt", rating: 3, cost: 140};
-const ARMOR_WOOD_PANTS = {name: "Wood Pants", rating: 4, cost: 330};
-const ARMOR_SHINY_NIGHTGOWN = {name: "Shiny Nightgown", rating: 5, cost: 470};
-const ARMOR_CHRISTMAS_LIGHT_UP_SOCKS = {name: "Christmas Light Up Socks", rating: 6, cost: 820};
-const ARMOR_ADAMANTIUM_NOSE_RING = {name: "Adamantium Nose-ring", rating: 8, cost: 1210};
-const ARMOR_DRID_DOG_TURD_SUIT = {name: "Dried Dog-turd Suit", rating: 10, cost: 1650};
-const ARMOR_TOWEL_OF_INDECENCY = {name: "Towel of Indecency", rating: 12, cost: 2150};
-const ARMOR_YELLOW_POLKA_DOT_BIKINI = {name: "Yellow Polka-dot Bikini", rating: 14, cost: 3100};
-const ARMOR_DRAGON_SCALE_FULL_BODY_ARMOR = {name: "Dragon Scale Full Body Armor", rating: 16, cost: 6400};
+const ARMOR_CARDBOARD_UNDERWEAR = {id:1, name: "Cardboard Underwear", rating: 1, cost: 25};
+const ARMOR_CROCHETED_CROCS = {id:2, name: "Crocheted Crocs", rating: 2, cost: 60};
+const ARMOR_CARPET_TSHIRT = {id:3, name: "Carpet T-Shirt", rating: 3, cost: 140};
+const ARMOR_WOOD_PANTS = {id:4, name: "Wood Pants", rating: 4, cost: 330};
+const ARMOR_SHINY_NIGHTGOWN = {id:5, name: "Shiny Nightgown", rating: 5, cost: 470};
+const ARMOR_CHRISTMAS_LIGHT_UP_SOCKS = {id:6, name: "Christmas Light Up Socks", rating: 6, cost: 820};
+const ARMOR_ADAMANTIUM_NOSE_RING = {id:7, name: "Adamantium Nose-ring", rating: 8, cost: 1210};
+const ARMOR_DRID_DOG_TURD_SUIT = {id:8, name: "Dried Dog-turd Suit", rating: 10, cost: 1650};
+const ARMOR_TOWEL_OF_INDECENCY = {id:9, name: "Towel of Indecency", rating: 12, cost: 2150};
+const ARMOR_YELLOW_POLKA_DOT_BIKINI = {id:10, name: "Yellow Polka-dot Bikini", rating: 14, cost: 3100};
+const ARMOR_DRAGON_SCALE_FULL_BODY_ARMOR = {id:11, name: "Dragon Scale Full Body Armor", rating: 16, cost: 6400};
 const ARMORS = [ARMOR_CARDBOARD_UNDERWEAR, ARMOR_CROCHETED_CROCS, ARMOR_CARPET_TSHIRT, ARMOR_WOOD_PANTS, ARMOR_SHINY_NIGHTGOWN, ARMOR_CHRISTMAS_LIGHT_UP_SOCKS, ARMOR_ADAMANTIUM_NOSE_RING, ARMOR_DRID_DOG_TURD_SUIT, ARMOR_TOWEL_OF_INDECENCY, ARMOR_YELLOW_POLKA_DOT_BIKINI, ARMOR_DRAGON_SCALE_FULL_BODY_ARMOR];
 
 export function ShowArmorShop(game) {
-    game.shopPopover.setTitle("Armor Shop");
-    game.shopPopover.setItems(ARMORS);
+    let currentGame = game.getCurrentGame();
+    game.shopPopover.setShopType("Armor");
+    game.shopPopover.setItems(ARMORS, currentGame.armor);
+    UpdateCurrentArmorDisplay(game);
+    game.shopPopover.updateGoldDisplay();
+    game.shopPopover.setBuyButtonClick((buyItem) => {
+        if (buyItem != null && buyItem !== currentGame.armor) {
+            let currentArmorRating = 0;
+            let currentArmorCost = 0;
+            if (currentGame.armor != null) {
+                currentArmorCost = Math.floor(currentGame.armor.cost / 2);
+                currentArmorRating = currentGame.armor.rating;
+            }
+            if (currentGame.gold + currentArmorCost >= buyItem.cost && buyItem.rating > currentArmorRating) {
+                // Sell current armor first
+                currentGame.gold += currentArmorCost;
+                // Buy new armor
+                currentGame.gold -= buyItem.cost;
+                currentGame.armor = buyItem;
+                game.shopPopover.setItems(ARMORS, currentGame.armor);
+                UpdateCurrentArmorDisplay(game);
+                game.shopPopover.updateGoldDisplay();
+                game.mainWindow.updateDisplay();
+            }
+        }
+    });
     game.shopPopover.show();
+}
+
+function UpdateCurrentArmorDisplay(game) {
+    let armor = game.getCurrentGame().armor;
+    let armorName = "No Armor";
+    let armorRating = "0";
+    let armorWorth = "0";
+    if (armor !== null) {
+        armorName = armor.name;
+        armorRating = armor.rating;
+        armorWorth = Math.floor(armor.cost / 2);
+    }
+    game.shopPopover.updateCurrentItemDisplay(armorName, armorRating, armorWorth);
 }

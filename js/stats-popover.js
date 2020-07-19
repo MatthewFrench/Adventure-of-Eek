@@ -25,10 +25,20 @@ export class StatsPopover {
         this.strengthDiv.innerText = "Strength: " + currentGame.strength;
         this.speedDiv.innerText = "Speed: " + currentGame.speed;
         this.healthDiv.innerText = "Health: " + currentGame.health;
-        this.armorDiv.innerText = "Armor: " + (currentGame.armor === "" ? "No Armor" : currentGame.armor);
-        this.armorCountDiv.innerText = "Armor Count: " + currentGame.armorCount;
-        this.weaponDiv.innerText = "Weapon: " + (currentGame.weapon === "" ? "No Weapon" : currentGame.weapon);
-        this.weaponCountDiv.innerText = "Weapon Count: " + currentGame.weaponCount;
+        if (currentGame.armor != null) {
+            this.armorDiv.innerText = "Armor: " + currentGame.armor.name;
+            this.armorCountDiv.innerText = "Armor Rating: " + currentGame.armor.rating;
+        } else {
+            this.armorDiv.innerText = "Armor: No Armor";
+            this.armorCountDiv.innerText = "Armor Rating: 0";
+        }
+        if (currentGame.weapon != null)  {
+            this.weaponDiv.innerText = "Weapon: " + currentGame.weapon.name;
+            this.weaponCountDiv.innerText = "Weapon Rating: " + currentGame.weapon.rating;
+        } else {
+            this.weaponDiv.innerText = "Weapon: No Weapon";
+            this.weaponCountDiv.innerText = "Weapon Rating: 0";
+        }
     }
     show() {
         this.updateDisplay();

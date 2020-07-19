@@ -35,6 +35,7 @@
     flex-direction: column;
 }
 .shop-left-top-pane {
+    flex: 1;
     border: solid min(0.25vh, 0.25vw) black;
     background-color: white;
     margin: min(1vh, 1vw);
@@ -71,10 +72,10 @@
     font-size: min(3vh, 3vw);
 }
 .shop-right-pane {
-    flex: 1;
     display: flex;
     flex-direction: row;
     align-items: center;
+    margin-bottom: min(1.5vh, 1.5vw);
 }
 .shop-buy-button {
     height: min(8vh, 8vw);
@@ -129,6 +130,12 @@
     cursor: pointer;
     user-select: none;
 }
-.shop-table-row.selected {
+.shop-table-row-buyable.selected {
     background-color: #5ca7d9;
+}.shop-table-row-not-buyable.selected {
+     background-color: #d95c5c;
+ }
+.shop-table-empty {
+    width: 100%;
+    text-align: center;
 }

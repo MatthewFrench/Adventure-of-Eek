@@ -14,20 +14,16 @@ export class MainWindow {
             this.game.statsPopover.show();
         }
         this.window = document.getElementById("main-window")
-
         this.healthDiv = document.getElementById( "main-window-statview-stat-health")
         this.experienceDiv = document.getElementById( "main-window-statview-stat-experience")
         this.levelDiv = document.getElementById( "main-window-statview-stat-level")
         this.goldDiv = document.getElementById( "main-window-statview-stat-gold")
-
         document.getElementById("shopButton").onclick = () => {
             ShowArmorShop(this.game);
         }
-
         document.getElementById("levelUpButton").onclick = ()  => {
             AppendExperience(1000, this.game);
         }
-
         document.getElementById("attackButton").onclick = () => {
             this.game.attackPopover.set("baby-chicken.png", "Baby Chicken", 10, 13)
             this.game.attackPopover.show()
