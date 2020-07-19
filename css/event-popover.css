@@ -12,7 +12,7 @@
     left: calc(50vw - min(40vh, 40vw) - min(0.25vh, 0.25vw));
     height: min(40vw, 40vh);
     top: calc(min(15vw, 15vh) - min(0.25vh, 0.25vw));
-    border: solid min(0.25vh, 0.25vw) black;
+    border: solid min(0.5vh, 0.5vw) black;
     background: #ffdbad;
     display: flex;
     flex-direction: column;
