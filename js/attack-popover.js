@@ -1,3 +1,5 @@
+import {AppendExperience} from "./models/LevelUpData.js";
+
 export class AttackPopover {
     constructor(game) {
         this.game = game
@@ -35,7 +37,49 @@ export class AttackPopover {
         this.selfHealthDiv.innerText = "You:   HP: " + currentGame.currentHealth +" / " + currentGame.health;
     }
     attackClicked() {
-
+        let currentGame = this.game.getCurrentGame();
+        this.enemyCurrentHealth -= 2;
+        if (this.enemyCurrentHealth <= 0) {
+            let earnedExperience = this.enemy.experience;
+            let earnedGold = this.enemy.gold;
+            currentGame.gold += earnedGold;
+            // Killed enemy
+            this.game.eventPopover.set("Discovered Valuables!",
+                "Gold: " + earnedGold + "\nExperience: " + earnedExperience,
+                "Yes!",
+                () => {
+                    this.game.eventPopover.hide();
+                    AppendExperience(earnedExperience, this.game);
+                })
+            this.hide();
+            this.game.eventPopover.show();
+            this.game.mainWindow.updateDisplay();
+        } else {
+            currentGame.currentHealth -= 1;
+            if (currentGame.currentHealth <= 0) {
+                // Dead self
+                let lostGold = this.enemy.gold * 2;
+                let currentGold = currentGame.gold;
+                let newGold = currentGold - lostGold;
+                if (newGold < 0) {
+                    newGold = 0;
+                }
+                let actualLostGold = currentGold - newGold;
+                currentGame.gold = newGold;
+                this.game.eventPopover.set("You Died",
+                    "Lost Gold: " + actualLostGold + "\n\nYou were revived back in town.",
+                    "Okay",
+                    () => {
+                        this.game.eventPopover.hide();
+                        currentGame.currentHealth = 1;
+                        this.game.mainWindow.updateDisplay();
+                    })
+                this.hide();
+                this.game.eventPopover.show()
+                this.game.mainWindow.updateDisplay();
+            }
+        }
+        this.updateHealthDisplays();
     }
     itemClicked() {
         this.game.itemsPopover.show(() => this.usedItem());

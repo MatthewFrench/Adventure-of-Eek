@@ -1,5 +1,5 @@
-const BASE = 15;
-const INCREASE_MULTIPLIER = 0.25;
+const BASE = 19;
+const INCREASE_MULTIPLIER = 1.4;
 const LEVEL_EXPERIENCE_CACHE = [0, 0, BASE];
 // This is a fibonacci-like algorithm
 function GetExperienceForLevel(level) {
@@ -10,7 +10,7 @@ function GetExperienceForLevel(level) {
             return experience;
         }
     }
-    let experience = Math.floor(GetExperienceForLevel(level - 2) * INCREASE_MULTIPLIER + GetExperienceForLevel(level - 1));
+    let experience = Math.floor((GetExperienceForLevel(level - 1) - GetExperienceForLevel(level - 2)) * INCREASE_MULTIPLIER + GetExperienceForLevel(level - 1));
     LEVEL_EXPERIENCE_CACHE[level] = experience;
     return experience;
 }
