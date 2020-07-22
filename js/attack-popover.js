@@ -117,10 +117,10 @@ export class AttackPopover {
     /*
     Creature object: strength, speed, weaponCount, armorCount
 
-    Strength increases damage.
+    Strength increases damage and increases chance of doing damage and change of not taking damage.
     Speed increases damage by normalized speed amount.
-    Weapon Count increases damage.
-    Armor Count reduces self damage.
+    Weapon Count increases damage and increases chance of doing damage.
+    Armor Count reduces self damage and decreases chance of taking damage.
 
     Returns array of damage done to each creature.
      */
@@ -160,12 +160,45 @@ export class AttackPopover {
         damageArray[1] = Math.round(Math.max(creature2Damage, 1));
 
         // Calculate dodge/block
+        let dodgeSuppression = 0.05;
+        let normalizedCreature1Dodge = (creature1ArmorCount - creature2WeaponCount + creature1Strength - creature2Strength) * dodgeSuppression;
+        let normalizedCreature2Dodge = (creature2ArmorCount - creature1WeaponCount + creature2Strength - creature1Strength) * dodgeSuppression;
+        if (normalizedCreature1Dodge < normalizedCreature2Dodge) {
+            let difference = 1 - normalizedCreature1Dodge;
+            normalizedCreature1Dodge += difference;
+            normalizedCreature2Dodge += difference;
+            normalizedCreature1Dodge = normalizedCreature1Dodge / normalizedCreature2Dodge;
+            normalizedCreature2Dodge = 2.0 - normalizedCreature1Dodge;
+        } else {
+            let difference = 1 - normalizedCreature2Dodge;
+            normalizedCreature1Dodge += difference;
+            normalizedCreature2Dodge += difference;
+            normalizedCreature2Dodge = normalizedCreature2Dodge / normalizedCreature1Dodge;
+            normalizedCreature1Dodge = 2.0 - normalizedCreature2Dodge;
+        }
+        let baseDodge = 0.5;
+        let creature1DodgeNumber = 1.0 - (1 - baseDodge) * normalizedCreature1Dodge;
+        let creature2DodgeNumber = 1.0 - (1 - baseDodge) * normalizedCreature2Dodge;
+        let dodge1 = true;
+        let dodge2 = true;
+        while (dodge1 && dodge2) {
+            dodge1 = Math.random() >= creature1DodgeNumber;
+            dodge2 = Math.random() >= creature2DodgeNumber;
+        }
+        let criticalStrike1 = Math.random() >= 0.95;
+        let criticalStrike2 = Math.random() >= 0.95;
+        if (dodge1 && !criticalStrike1) {
+            damageArray[0] = 0;
+        }
+        if (dodge2 && !criticalStrike2) {
+            damageArray[1] = 0;
+        }
 
         // Give a rare equal chance to critical strike
-        if (Math.random() > 0.95) {
+        if (criticalStrike1) {
             damageArray[0] *= 2;
         }
-        if (Math.random() > 0.95) {
+        if (criticalStrike2) {
             damageArray[1] *= 2;
         }
 

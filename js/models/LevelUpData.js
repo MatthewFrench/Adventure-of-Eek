@@ -1,4 +1,4 @@
-const BASE = 19;
+const BASE = 29;
 const INCREASE_MULTIPLIER = 1.4;
 const LEVEL_EXPERIENCE_CACHE = [0, 0, BASE];
 // This is a fibonacci-like algorithm
@@ -62,7 +62,7 @@ function CheckLevelUp(game) {
                 currentGame.currentHealth += healthIncrease;
                 statMessage += "Your health has increased by " + healthIncrease + "!\n";
             } else if (stat === GOLD_STAT) {
-                let goldBase = currentGame.level * 20;
+                let goldBase = currentGame.level * 5;
                 let foundGold = Math.floor(Math.random() * goldBase + goldBase);
                 currentGame.gold += foundGold;
                 statMessage += "You found " + foundGold + " gold!\n";
