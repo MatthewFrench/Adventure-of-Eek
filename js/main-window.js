@@ -9,7 +9,9 @@ export class MainWindow {
         this.mainTextDiv = document.getElementById("mainTextDiv")
         this.itemsButton = document.getElementById("itemsButton")
         this.itemsButton.onclick = () => {
-            this.game.itemsPopover.show();
+            this.game.itemsPopover.show(() => {
+                this.updateDisplay();
+            });
         }
         this.statsButton = document.getElementById("statsButton")
         this.statsButton.onclick = () => {

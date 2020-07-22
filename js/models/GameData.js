@@ -14,4 +14,16 @@ export class GameData {
         this.weapon = null;
         this.items = [];
     }
+    getArmorCount() {
+        if (this.armor === null) {
+            return 0;
+        }
+        return this.armor.rating;
+    }
+    getWeaponCount() {
+        if (this.weapon === null) {
+            return 0;
+        }
+        return this.weapon.rating;
+    }
 }
