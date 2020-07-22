@@ -53,7 +53,6 @@
     margin: min(2vh, 2vw);
     font-size: min(6vh, 6vw);
     padding-top: min(1vh, 1vw);
-    padding-bottom: min(1vh, 1vw);
     white-space: pre;
 }
 .attack-controls-container {
@@ -74,4 +73,42 @@
     padding-right: min(2vh, 2vw);
     font-size: min(6vh, 6vw);
     margin: 0 0 0 min(2vh, 2vw);
+}
+
+
+.attack-victory-container {
+    display: flex;
+    flex: 1;
+    margin-bottom: min(2vh, 2vw);
+}
+.attack-rewards-title {
+    font-size: min(3vh, 3vw);
+    font-weight: bold;
+}
+.attack-rewards-gold {
+    font-size: min(2.5vh, 2.5vw);
+}
+.attack-rewards-experience {
+    font-size: min(2.5vh, 2.5vw);
+}
+
+
+.attack-death-container {
+    display: flex;
+    flex: 1;
+    margin-bottom: min(2vh, 2vw);
+}
+.attack-death-text-container {
+    margin-left: min(3vh, 3vw);
+    flex: 1;
+}
+.attack-death-title {
+    font-size: min(3vh, 3vw);
+    font-weight: bold;
+}
+.attack-death-gold {
+    font-size: min(2.5vh, 2.5vw);
+}
+.attack-death-text {
+    font-size: min(2.5vh, 2.5vw);
 }
