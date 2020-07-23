@@ -1,0 +1,75 @@
+.heal-shop-popover-background-cover {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background: rgba(0, 0, 0, 0.34);
+    z-index: 10;
+}
+.heal-shop-popover {
+    position: absolute;
+    width: min(80vh, 80vw);
+    left: calc(50vw - min(40vh, 40vw) - min(0.5vh, 0.5vw));
+    height: min(60vw, 60vh);
+    top: calc(min(10vw, 10vh) - min(0.5vh, 0.5vw));
+    border: solid min(0.5vh, 0.5vw) black;
+    background: #ffdbad;
+    display: flex;
+    flex-direction: column;
+    z-index: 10;
+}
+.heal-shop-title {
+    width: 100%;
+    text-align: center;
+    font-size: min(6vh, 6vw);
+    font-family: Chalkboard, serif;
+}
+.heal-shop-close-button {
+    height: min(8vh, 8vw);
+    margin-left: min(3vh, 3vw);
+    padding-left: min(3vh, 3vw);
+    padding-right: min(3vh, 3vw);
+    margin-bottom: min(3vh, 3vw);
+}
+.heal-shop-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    margin-top: min(1vh, 1vw);
+}
+.heal-shop-main-section {
+    flex: 1;
+    display: flex;
+}
+.heal-shop-sub-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+.heal-shop-cost {
+    text-align: center;
+    font-size: min(3vh, 3vw);
+    margin-top: min(0.25vh, 0.25vw);
+}
+.heal-shop-health {
+    text-align: center;
+    font-size: min(4vh, 4vw);
+    margin-top: min(1vh, 1vw);
+    margin-bottom: min(1vh, 1vw);
+}
+.heal-shop-5-button, .heal-shop-50-button, .heal-shop-20-percent-button, .heal-shop-full-heal-button {
+    font-size: min(4vh, 4vw);
+    margin: 0;
+    width: min(35vh, 35vw);
+    align-self: center;
+}
+.heal-shop-gold {
+    text-align: center;
+    font-size: min(4vh, 4vw);
+    margin-bottom: min(1vh, 1vw);
+    margin-top: min(1vh, 1vw);
+}

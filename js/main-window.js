@@ -34,6 +34,12 @@ export class MainWindow {
         document.getElementById("attackButton").onclick = () => {
             this.game.attackPopover.show(CREATURE_BABY_CHICKEN);
         }
+        document.getElementById("healShopButton").onclick = () =>  {
+            this.game.healShopPopover.show();
+        }
+        document.getElementById("foodShopButton").onclick = () =>  {
+            this.game.foodShopPopover.show();
+        }
     }
     show() {
         this.updateDisplay();

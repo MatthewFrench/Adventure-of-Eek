@@ -1,0 +1,38 @@
+.food-shop-popover-background-cover {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background: rgba(0, 0, 0, 0.34);
+    z-index: 10;
+}
+.food-shop-popover {
+    position: absolute;
+    width: min(80vh, 80vw);
+    left: calc(50vw - min(40vh, 40vw) - min(0.5vh, 0.5vw));
+    height: min(65vw, 65vh);
+    top: calc(min(10vw, 10vh) - min(0.5vh, 0.5vw));
+    border: solid min(0.5vh, 0.5vw) black;
+    background: #ffdbad;
+    display: flex;
+    flex-direction: column;
+    z-index: 10;
+}
+.food-shop-title {
+    width: 100%;
+    text-align: center;
+    font-size: min(6vh, 6vw);
+    font-family: Chalkboard, serif;
+}
+.food-shop-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+.food-shop-close-button {
+    height: min(8vh, 8vw);
+    margin-left: min(3vh, 3vw);
+    padding-left: min(3vh, 3vw);
+    padding-right: min(3vh, 3vw);
+}

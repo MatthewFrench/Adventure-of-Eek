@@ -15,9 +15,51 @@
     <link rel="stylesheet" href="css/event-popover.css">
     <link rel="stylesheet" href="css/shop-popover.css">
     <link rel="stylesheet" href="css/attack-popover.css">
+    <link rel="stylesheet" href="css/heal-shop-popover.css">
+    <link rel="stylesheet" href="css/food-shop-popover.css">
     <script type="module" src="js/main.js"></script>
 </head>
 <body>
+
+<div class="food-shop-popover-background-cover" id="food-shop-popover-background-cover" style="display:none">
+    <div class="food-shop-popover" id="food-shop-popover">
+        <div class="heal-shop-title" id="food-shop-title">Food Shop</div>
+        <div class="food-shop-container">
+        </div>
+        <button class="button food-shop-close-button" id="food-shop-close-button">Close</button>
+    </div>
+</div>
+
+<div class="heal-shop-popover-background-cover" id="heal-shop-popover-background-cover" style="display:none">
+    <div class="heal-shop-popover" id="heal-shop-popover">
+        <div class="heal-shop-title" id="heal-shop-title">Heal Shop</div>
+        <div class="heal-shop-health" id="heal-shop-health">Health: 0 / 0</div>
+        <div class="heal-shop-container">
+            <div class="heal-shop-main-section">
+                <div class="heal-shop-sub-section">
+                    <button class="button heal-shop-5-button" id="heal-shop-5-button">Heal 5 Health</button>
+                    <div class="heal-shop-cost">Cost: 10 Gold</div>
+                </div>
+                <div class="heal-shop-sub-section">
+                    <button class="button heal-shop-50-button" id="heal-shop-50-button">Heal 50 Health</button>
+                    <div class="heal-shop-cost">Cost: 75 Gold</div>
+                </div>
+            </div>
+            <div class="heal-shop-main-section">
+                <div class="heal-shop-sub-section">
+                    <button class="button heal-shop-20-percent-button" id="heal-shop-20-percent-button">Heal 20% Health</button>
+                    <div class="heal-shop-cost">Cost: 60 Gold</div>
+                </div>
+                <div class="heal-shop-sub-section">
+                    <button class="button heal-shop-full-heal-button" id="heal-shop-full-heal-button">Full Heal</button>
+                    <div class="heal-shop-cost">Cost: 200 Gold</div>
+                </div>
+            </div>
+        </div>
+        <div class="heal-shop-gold" id="heal-shop-gold">Current Gold: 0</div>
+        <button class="button heal-shop-close-button" id="heal-shop-close-button">Close</button>
+    </div>
+</div>
 
 <div class="attack-popover-background-cover" id="attack-popover-background-cover" style="display:none">
     <div class="attack-popover" id="attack-popover">
@@ -244,6 +286,12 @@
             </button>
             <button class="textStroke button main-window-statview-stats-button" id="weaponShopButton">
                 Weapon Shop
+            </button>
+            <button class="textStroke button main-window-statview-stats-button" id="healShopButton">
+                Heal Shop
+            </button>
+            <button class="textStroke button main-window-statview-stats-button" id="foodShopButton">
+                Food Shop
             </button>
             <button class="textStroke button main-window-statview-stats-button" id="levelUpButton">
                 Level Up Event

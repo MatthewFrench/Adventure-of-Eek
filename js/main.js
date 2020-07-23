@@ -11,6 +11,8 @@ import {LoadGameWindow} from "./load-game-window.js";
 import {GlobalData} from "./models/GlobalData.js";
 import {GameData} from "./models/GameData.js";
 import {ITEM_SUSHI} from "./models/ItemData.js";
+import {FoodShopPopover} from "./food-shop-popover.js";
+import {HealShopPopover} from "./heal-shop-popover.js";
 
 export class Game {
     constructor() {
@@ -25,6 +27,8 @@ export class Game {
         this.eventPopover = new EventPopover(this);
         this.shopPopover = new ShopPopover(this);
         this.attackPopover = new AttackPopover(this);
+        this.foodShopPopover = new FoodShopPopover(this);
+        this.healShopPopover = new HealShopPopover(this);
     }
 
     createNewGame(name, strength, speed, health) {
