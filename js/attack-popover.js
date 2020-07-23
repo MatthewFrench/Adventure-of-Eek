@@ -57,8 +57,26 @@ export class AttackPopover {
         this.updateHealthDisplays();
     }
     dealDamageToEnemy(damage) {
+        if (damage.dodgedHit === true) {
+            if (Math.random() >= 0.5) {
+                this.game.print("The " + this.enemy.name.toLowerCase() + " blocked your attack!");
+            } else {
+                this.game.print("The " + this.enemy.name.toLowerCase() + " dodged your attack!");
+            }
+        }
         if (damage.damageTaken === 0) {
             return true;
+        }
+        if (damage.numberOfHits <= 1) {
+            this.game.print("You" + (damage.criticalHit ? " CRITICAL" : "") + " hit the " + this.enemy.name.toLowerCase() + " for " + damage.damageTaken + " damage!");
+        } else {
+            let hitTimes;
+            if (damage.numberOfHits === 2) {
+                hitTimes = "twice";
+            } else {
+                hitTimes = damage.numberOfHits + " times";
+            }
+            this.game.print("You" + (damage.criticalHit ? " CRITICAL" : "") + " hit the " + this.enemy.name.toLowerCase() + " " + hitTimes + " for a total of " + damage.damageTaken + " damage!");
         }
         this.enemyCurrentHealth -= damage.damageTaken;
         if (this.enemyCurrentHealth <= 0) {
@@ -77,8 +95,26 @@ export class AttackPopover {
         return true;
     }
     dealDamageToPlayer(damage) {
+        if (damage.dodgedHit === true) {
+            if (Math.random() >= 0.5) {
+                this.game.print("You blocked the " + this.enemy.name.toLowerCase() + "'s attack!");
+            } else {
+                this.game.print("You dodged the " + this.enemy.name.toLowerCase() + "'s attack!");
+            }
+        }
         if (damage.damageTaken === 0) {
             return true;
+        }
+        if (damage.numberOfHits <= 1) {
+            this.game.print("The " + this.enemy.name.toLowerCase() + (damage.criticalHit ? " CRITICAL" : "") + " hits you for " + damage.damageTaken + " damage!");
+        } else {
+            let hitTimes;
+            if (damage.numberOfHits === 2) {
+                hitTimes = "twice";
+            } else {
+                hitTimes = damage.numberOfHits + " times";
+            }
+            this.game.print("The " + this.enemy.name.toLowerCase() + (damage.criticalHit ? " CRITICAL" : "") + " hits you " + hitTimes + " for a total of " + damage.damageTaken + " damage!");
         }
         let currentGame = this.game.getCurrentGame();
         currentGame.currentHealth -= damage.damageTaken;
@@ -207,6 +243,7 @@ export class AttackPopover {
         this.victoryDiv.style.display = "";
         this.controlsContainer.style.display = "none";
         this.victoryCloseButton.focus();
+        this.game.print(this.enemy.name + " defeated! You earned " + gold + " gold and " + experience + " experience.");
     }
     showDeath(lostGold, closeCallback) {
         this.deathGoldDiv.innerText = "You lost " + lostGold + " gold.";
@@ -214,6 +251,7 @@ export class AttackPopover {
         this.deathDiv.style.display = "";
         this.controlsContainer.style.display = "none";
         this.deathCloseButton.focus();
+        this.game.print("You died. You lost " + lostGold + " gold. You were revived back in town.");
     }
     itemClicked() {
         this.game.itemsPopover.show(() => this.usedItem());

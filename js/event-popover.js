@@ -17,6 +17,7 @@ export class EventPopover {
     }
     show() {
         this.popover.style.display = "";
+        this.closeButton.focus();
     }
     hide() {
         this.popover.style.display = "none"

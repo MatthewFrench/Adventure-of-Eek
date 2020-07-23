@@ -77,11 +77,11 @@ function CheckLevelUp(game) {
             statMessage,
             "Yay!",
             () => {
-                game.print(printMessage);
-                game.eventPopover.hide()
+                game.eventPopover.hide();
                 CheckLevelUp(game);
             })
-        game.eventPopover.show()
+        game.eventPopover.show();
+        game.print(printMessage);
         game.mainWindow.updateDisplay();
     }
 }

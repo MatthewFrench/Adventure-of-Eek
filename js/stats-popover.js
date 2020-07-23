@@ -43,6 +43,7 @@ export class StatsPopover {
     show() {
         this.updateDisplay();
         this.popover.style.display = ""
+        this.closeButton.focus();
     }
     hide() {
         this.popover.style.display = "none"
