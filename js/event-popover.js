@@ -9,13 +9,6 @@ export class EventPopover {
         this.titleDiv = document.getElementById("event-title")
         this.textDiv = document.getElementById("event-text")
     }
-
-    /**
-     * Example:
-     * "Level up!"
-        "You have leveled up to level " + 5 + "!" + "\n\n" +
-        "Your strength has increased!"
-     */
     set(title, text, buttonText, onClick) {
         this.titleDiv.innerText = title;
         this.textDiv.innerText = text;

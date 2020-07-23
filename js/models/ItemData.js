@@ -4,11 +4,13 @@ export const ITEM_SUSHI = {id: 1, itemName: "Sushi", itemImage: "sushi.png"}
 export function UseItem(item, game) {
     const currentGame = game.getCurrentGame();
     if (item === ITEM_SUSHI) {
+        let originalHealth = currentGame.currentHealth;
         currentGame.currentHealth += 50;
         if (currentGame.currentHealth > currentGame.health) {
             currentGame.currentHealth = currentGame.health;
         }
-        game.print("You ate " + item.itemName.toLowerCase() + ". It was delicious.");
+        let newHealth = currentGame.currentHealth - originalHealth;
+        game.print("You ate " + item.itemName.toLowerCase() + ". " + newHealth + " health restored. It was delicious.");
     }
 }
 

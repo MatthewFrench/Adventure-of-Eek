@@ -15,7 +15,7 @@ export class NewGameWindow {
                         "Next",
                         () => {
                             this.game.eventPopover.set("Intro Final",
-                                "The town is sick of all the yard work so they are sending you on the adventure of freeing the town. They have cleared and used weed killer on one area to the East.\n\nBe careful, the overgrowth appears to be affecting the wildlife as well!",
+                                "The town is sick of yard work so they are sending you on the adventure of freeing the town. They have cleared and used weed killer on one area to the East.\n\nBe careful, the overgrowth appears to be affecting the wildlife as well!",
                                 "Let's Go!",
                                 () => {
                                     this.game.eventPopover.hide()

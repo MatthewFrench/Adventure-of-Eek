@@ -44,8 +44,9 @@
     padding: min(1.5vh, 1.5vw);
     border: solid min(0.25vh, 0.25vw) black;
     background: orange;
-    white-space: pre;
+    white-space: pre-wrap;
     display: inline-flex;
     overflow-y: auto;
     font-size: min(3vh, 3vw);
+    max-width: 100%;
 }
