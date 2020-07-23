@@ -47,7 +47,10 @@ export class Game {
     }
 
     print(text) {
-        this.mainWindow.mainTextDiv.insertBefore(document.createTextNode(text + "\n"), this.mainWindow.mainTextDiv.childNodes[0]);
+        let textDiv = document.createElement("div");
+        textDiv.classList.add("main-window-text-line");
+        textDiv.innerText = text;
+        this.mainWindow.mainTextDiv.insertBefore(textDiv, this.mainWindow.mainTextDiv.childNodes[0]);
     }
 }
 
