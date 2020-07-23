@@ -226,7 +226,20 @@ export class AttackPopover {
         this.updateHealthDisplays();
     }
     runClicked() {
-        this.hide()
+        let currentGame = this.game.getCurrentGame();
+        let baseRunAway = 0.5;
+        let runValue = (this.enemy.strength + this.enemy.speed) / (currentGame.strength + currentGame.speed);
+        let runAwayChance = Math.min(Math.max(1.0 - (1 - baseRunAway) * runValue, 0.1), 0.9);
+        let runAway = Math.random() < runAwayChance;
+        if (!runAway) {
+            let turnDamage = AttackPopover.getTurnDamage(
+                {strength: this.enemy.strength, speed: this.enemy.speed, weaponCount: this.enemy.weaponCount, armorCount: this.enemy.armorCount},
+                {strength: currentGame.strength, speed: currentGame.speed, weaponCount: currentGame.getWeaponCount(), armorCount: currentGame.getArmorCount()})
+            this.dealDamageToPlayer(turnDamage[1]);
+            this.updateHealthDisplays();
+        } else {
+            this.hide();
+        }
     }
     show() {
         this.popover.style.display = "";
