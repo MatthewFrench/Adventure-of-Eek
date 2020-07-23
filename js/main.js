@@ -54,7 +54,6 @@ export class Game {
 let game;
 function main() {
     game = new Game();
-    game.print("Welcome to the Adventure of Eek!")
 }
 
 window.addEventListener("load", main);
