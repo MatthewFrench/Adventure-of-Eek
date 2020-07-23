@@ -1,5 +1,5 @@
 //export const ITEM_NONE = {id: 0, itemName: "", itemImage: ""}
-export const ITEM_SUSHI = {id: 1, itemName: "Sushi", itemImage: "sushi.png"}
+export const ITEM_SUSHI = {id: 1, itemName: "Sushi", itemImage: "sushi.png", useText: "It was delicious."}
 
 export function UseItem(item, game) {
     const currentGame = game.getCurrentGame();
@@ -10,7 +10,7 @@ export function UseItem(item, game) {
             currentGame.currentHealth = currentGame.health;
         }
         let newHealth = currentGame.currentHealth - originalHealth;
-        game.print("You ate " + item.itemName.toLowerCase() + ". " + newHealth + " health restored. It was delicious.");
+        game.print("You ate " + item.itemName.toLowerCase() + ". " + newHealth + " health restored. " + item.useText);
     }
 }
 

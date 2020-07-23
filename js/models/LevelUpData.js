@@ -36,7 +36,8 @@ function CheckLevelUp(game) {
         const GOLD_STAT = 4;
         const STAT_ARRAY = shuffleArray([STRENGTH_STAT, SPEED_STAT, HEALTH_STAT, GOLD_STAT]);
         let increaseStats = 0;
-        let statMessage = "You  have leveled up to level " + currentGame.level + "!\n\n";
+        let printMessage = "Leveled up to level " + currentGame.level + "! ";
+        let statMessage = "You have leveled up to level " + currentGame.level + "!\n\n";
         // Give one free stat increase per level
         increaseStats += 1;
         // Randomly choose to increase other stats
@@ -52,26 +53,31 @@ function CheckLevelUp(game) {
                 let increaseAmount = Math.round(Math.random() * 2 + 1);
                 currentGame.strength += increaseAmount;
                 statMessage += "Your strength has increased by " + increaseAmount + "!\n";
+                printMessage += "Strength has increased by " + increaseAmount + "! ";
             } else if (stat === SPEED_STAT) {
                 let increaseAmount = Math.round(Math.random() * 2 + 1);
                 currentGame.speed += increaseAmount;
                 statMessage += "Your speed has increased by " + increaseAmount + "!\n";
+                printMessage += "Speed has increased by " + increaseAmount + "! ";
             } else if (stat === HEALTH_STAT) {
                 let healthIncrease = Math.floor(Math.random() * 5 + 5);
                 currentGame.health += healthIncrease;
                 currentGame.currentHealth += healthIncrease;
                 statMessage += "Your health has increased by " + healthIncrease + "!\n";
+                printMessage += "Health has increased by " + healthIncrease + "! ";
             } else if (stat === GOLD_STAT) {
                 let goldBase = currentGame.level * 5;
                 let foundGold = Math.floor(Math.random() * goldBase + goldBase);
                 currentGame.gold += foundGold;
                 statMessage += "You found " + foundGold + " gold!\n";
+                printMessage += "Found " + foundGold + " gold! ";
             }
         }
         game.eventPopover.set("Level up!",
             statMessage,
             "Yay!",
             () => {
+                game.print(printMessage);
                 game.eventPopover.hide()
                 CheckLevelUp(game);
             })

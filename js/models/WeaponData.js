@@ -1,5 +1,5 @@
-const WEAPON_PAPER_CARDBOARD_TUBE = {id:1, name: "Wrapping Paper Cardboard Tube", rating: 1, cost: 25, buyLine: "This will go well with the cardboard underwear. Plus it is super fun to hit stuff with the cardboard tube when you finish wrapping presents!"};
-const WEAPON_SERRATED_PLASTIC_SPORK = {id:2, name: "Serrated Plastic Spork", rating: 2, cost: 60, buyLine: "The shopkeeper assures me it is one of the most deadliest and rare eating utensils in the world."};
+const WEAPON_PAPER_CARDBOARD_TUBE = {id:1, name: "Wrapping Paper Cardboard Tube", rating: 1, cost: 25, buyLine: "This will go well with the cardboard underwear. Plus it is super fun to hit stuff with the cardboard tube after wrapping presents!"};
+const WEAPON_SERRATED_PLASTIC_SPORK = {id:2, name: "Serrated Plastic Spork", rating: 2, cost: 60, buyLine: "The shopkeeper assures me it is one of the most deadliest and rarest eating utensils in the world."};
 const WEAPON_EXTREMELY_BAD_BREATH = {id:3, name: "Extremely Bad Breath", rating: 3, cost: 140, buyLine: "Did I already have this before I made the purchase?"};
 const WEAPON_HEALTHPOT_LAUNCHER = {id:4, name: "Healthpot Launcher", rating: 4, cost: 330, buyLine: "We're going to kill them with the power of healing."};
 const WEAPON_FROZEN_POPSICKLE_SHIV = {id:5, name: "Frozen Popsickle Shiv", rating: 5, cost: 470, buyLine: "Very tasty, very deadly. Refreshing on a hot day."};

@@ -32,18 +32,6 @@ export class AttackPopover {
         this.enemyHealth = 0;
         this.enemyCurrentHealth = 0;
     }
-    prepareBattle(enemyCreatureData) {
-        this.enemy = enemyCreatureData;
-        this.enemyHealth = enemyCreatureData.health;
-        this.enemyCurrentHealth = enemyCreatureData.health;
-        this.enemyImage.style.backgroundImage = "url(\"./images/" + enemyCreatureData.image +"\")";
-        this.enemyNameDiv.innerText = enemyCreatureData.name;
-        this.updateHealthDisplays();
-        this.victoryDiv.style.display = "none";
-        this.deathDiv.style.display = "none";
-        this.controlsContainer.style.display = "";
-        this.attackButton.focus();
-    }
     updateHealthDisplays() {
         let currentGame = this.game.getCurrentGame();
         this.enemyHealthDiv.innerText = "HP: " + this.enemyCurrentHealth + " / " + this.enemyHealth;
@@ -69,10 +57,10 @@ export class AttackPopover {
         this.updateHealthDisplays();
     }
     dealDamageToEnemy(damage) {
-        if (damage === 0) {
+        if (damage.damageTaken === 0) {
             return true;
         }
-        this.enemyCurrentHealth -= damage;
+        this.enemyCurrentHealth -= damage.damageTaken;
         if (this.enemyCurrentHealth <= 0) {
             let earnedExperience = this.enemy.experience;
             let earnedGold = this.enemy.gold;
@@ -89,11 +77,11 @@ export class AttackPopover {
         return true;
     }
     dealDamageToPlayer(damage) {
-        if (damage === 0) {
+        if (damage.damageTaken === 0) {
             return true;
         }
         let currentGame = this.game.getCurrentGame();
-        currentGame.currentHealth -= damage;
+        currentGame.currentHealth -= damage.damageTaken;
         if (currentGame.currentHealth <= 0) {
             // Dead self
             let lostGold = this.enemy.gold * 2;
@@ -122,10 +110,12 @@ export class AttackPopover {
     Weapon Count increases damage and increases chance of doing damage.
     Armor Count reduces self damage and decreases chance of taking damage.
 
-    Returns array of damage done to each creature.
+    Returns array of damage results done to each creature.
+    {damageTaken: 0, numberOfHits: 0, dodgedHit: false, criticalHit: false}
      */
     static getTurnDamage(creature1, creature2) {
-        let damageArray = [0, 0];
+        let creature1Result = {damageTaken: 0, numberOfHits: 0, dodgedHit: false, criticalHit: false};
+        let creature2Result = {damageTaken: 0, numberOfHits: 0, dodgedHit: false, criticalHit: false};
         let creature1Strength = creature1.strength;
         let creature1Speed = creature1.speed;
         let creature1WeaponCount = creature1.weaponCount;
@@ -146,6 +136,8 @@ export class AttackPopover {
             normalizedCreature1Speed = normalizedCreature1Speed / normalizedCreature2Speed;
             normalizedCreature2Speed = 1;
         }
+        creature1Result.numberOfHits = Math.round(normalizedCreature2Speed);
+        creature2Result.numberOfHits = Math.round(normalizedCreature1Speed);
 
         let strengthWeight = 0.25;
         let weaponWeight = 1.00;
@@ -156,8 +148,8 @@ export class AttackPopover {
         let creature1Damage = normalizedCreature2Speed * (creature2Strength * strengthWeight + creature2WeaponCount * weaponWeight - creature1ArmorCount * armorWeight) * (Math.random() * 0.5 + 0.75) * damageWeight;
         let creature2Damage = normalizedCreature1Speed * (creature1Strength * strengthWeight + creature1WeaponCount * weaponWeight - creature2ArmorCount * armorWeight) * (Math.random() * 0.5 + 0.75) * damageWeight;
 
-        damageArray[0] = Math.round(Math.max(creature1Damage, 1));
-        damageArray[1] = Math.round(Math.max(creature2Damage, 1));
+        creature1Result.damageTaken = Math.round(Math.max(creature1Damage, 1));
+        creature2Result.damageTaken = Math.round(Math.max(creature2Damage, 1));
 
         // Calculate dodge/block
         let dodgeSuppression = 0.05;
@@ -188,21 +180,25 @@ export class AttackPopover {
         let criticalStrike1 = Math.random() >= 0.95;
         let criticalStrike2 = Math.random() >= 0.95;
         if (dodge1 && !criticalStrike1) {
-            damageArray[0] = 0;
+            creature1Result.dodgedHit = true;
+            creature1Result.damageTaken = 0;
         }
         if (dodge2 && !criticalStrike2) {
-            damageArray[1] = 0;
+            creature2Result.dodgedHit = true;
+            creature2Result.damageTaken = 0;
         }
 
         // Give a rare equal chance to critical strike
         if (criticalStrike1) {
-            damageArray[0] *= 2;
+            creature1Result.criticalHit = true;
+            creature1Result.damageTaken *= 2;
         }
         if (criticalStrike2) {
-            damageArray[1] *= 2;
+            creature2Result.criticalHit = true;
+            creature2Result.damageTaken *= 2;
         }
 
-        return damageArray;
+        return [creature1Result, creature2Result];
     }
     showVictory(gold, experience, closeCallback) {
         this.victoryGoldDiv.innerText = "Gold: " + gold;
@@ -232,6 +228,7 @@ export class AttackPopover {
         let runAwayChance = Math.min(Math.max(1.0 - (1 - baseRunAway) * runValue, 0.1), 0.9);
         let runAway = Math.random() < runAwayChance;
         if (!runAway) {
+            this.game.print("You failed to run away from the " + this.enemy.name.toLowerCase() + ".");
             let turnDamage = AttackPopover.getTurnDamage(
                 {strength: this.enemy.strength, speed: this.enemy.speed, weaponCount: this.enemy.weaponCount, armorCount: this.enemy.armorCount},
                 {strength: currentGame.strength, speed: currentGame.speed, weaponCount: currentGame.getWeaponCount(), armorCount: currentGame.getArmorCount()})
@@ -239,10 +236,22 @@ export class AttackPopover {
             this.updateHealthDisplays();
         } else {
             this.hide();
+            this.game.print("You successfully ran away from the " + this.enemy.name.toLowerCase() + "!");
         }
     }
-    show() {
+    show(enemyCreatureData) {
+        this.enemy = enemyCreatureData;
+        this.enemyHealth = enemyCreatureData.health;
+        this.enemyCurrentHealth = enemyCreatureData.health;
+        this.enemyImage.style.backgroundImage = "url(\"./images/" + enemyCreatureData.image +"\")";
+        this.enemyNameDiv.innerText = enemyCreatureData.name;
+        this.updateHealthDisplays();
+        this.victoryDiv.style.display = "none";
+        this.deathDiv.style.display = "none";
+        this.controlsContainer.style.display = "";
         this.popover.style.display = "";
+        this.attackButton.focus();
+        this.game.print("A " + enemyCreatureData.name.toLowerCase() +  " attacks! " + enemyCreatureData.encounterLine);
     }
     hide() {
         this.popover.style.display = "none"

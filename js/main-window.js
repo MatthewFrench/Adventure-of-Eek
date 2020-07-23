@@ -32,8 +32,7 @@ export class MainWindow {
             AppendExperience(1000, this.game);
         }
         document.getElementById("attackButton").onclick = () => {
-            this.game.attackPopover.prepareBattle(CREATURE_BABY_CHICKEN);
-            this.game.attackPopover.show()
+            this.game.attackPopover.show(CREATURE_BABY_CHICKEN);
         }
     }
     show() {
