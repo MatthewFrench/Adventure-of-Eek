@@ -61,7 +61,7 @@
     margin-top: min(1vh, 1vw);
     margin-bottom: min(1vh, 1vw);
 }
-.heal-shop-5-button, .heal-shop-50-button, .heal-shop-20-percent-button, .heal-shop-full-heal-button {
+.heal-shop-3-7-button, .heal-shop-30-70-button, .heal-shop-15-25-percent-button, .heal-shop-full-heal-button {
     font-size: min(4vh, 4vw);
     margin: 0;
     width: min(35vh, 35vw);

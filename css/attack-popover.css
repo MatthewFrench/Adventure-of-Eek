@@ -91,6 +91,9 @@
 .attack-rewards-experience {
     font-size: min(2.5vh, 2.5vw);
 }
+.attack-victory-close-button {
+    width: min(20vh, 20vw);
+}
 
 
 .attack-death-container {
