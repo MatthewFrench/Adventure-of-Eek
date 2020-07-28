@@ -30,6 +30,59 @@
     display: flex;
     flex-direction: column;
 }
+.food-shop-inventory-container {
+    flex: 1;
+    display: flex;
+    padding-right: min(1vh, 1vw);
+    justify-content: space-evenly;
+}
+.food-shop-item-box {
+    flex: 1;
+    border: solid min(0.4vh, 0.4vw) black;
+    margin-top: min(1vh, 1vw);
+    margin-left: min(1vh, 1vw);
+    max-width: min(11vw, 11vh);
+    max-height: min(11vw, 11vh);
+    background-size: contain;
+    position: relative;
+    cursor: pointer;
+}
+.item-box-name {
+    width: 100%;
+    text-align: center;
+    font-size: min(2vh, 2vw);
+    position: absolute;
+    top: max(-2.55vh, -2.55vw);
+    left: 0;
+}
+.food-shop-bottom-container {
+    flex: 1;
+    display: flex;
+    padding-right: min(1vh, 1vw);
+    justify-content: space-evenly;
+    flex-flow: wrap-reverse;
+}
+.food-shop-buy-item-box {
+    flex: 1;
+    border: solid min(0.4vh, 0.4vw) black;
+    margin-top: min(1vh, 1vw);
+    margin-left: min(1vh, 1vw);
+    max-width: min(21vw, 21vh);
+    max-height: min(21vw, 21vh);
+    min-width: min(21vw, 21vh);
+    min-height: min(21vw, 21vh);
+    background-size: contain;
+    position: relative;
+    cursor: pointer;
+}
+.food-shop-buy-item-box-name {
+    width: 100%;
+    text-align: center;
+    font-size: min(2vh, 2vw);
+    position: absolute;
+    top: max(-2.55vh, -2.55vw);
+    left: 0;
+}
 .food-shop-close-button {
     height: min(8vh, 8vw);
     margin-left: min(3vh, 3vw);
