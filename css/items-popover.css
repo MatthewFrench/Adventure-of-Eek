@@ -49,10 +49,10 @@
     position: relative;
 }
 .item-box-name {
-    width: 100%;
+    width: min(16vh, 16vw);
     text-align: center;
-    font-size: min(2vh, 2vw);
+    font-size: min(1.75vh, 1.75vw);
     position: absolute;
-    top: max(-2.55vh, -2.55vw);
-    left: 0;
+    top: max(-2.5vh, -2.5vw);
+    left: calc(max(-8vh, -8vw) + min(5.5vw, 5.5vh));
 }

@@ -11,7 +11,7 @@
     position: absolute;
     width: min(80vh, 80vw);
     left: calc(50vw - min(40vh, 40vw) - min(0.5vh, 0.5vw));
-    height: min(65vw, 65vh);
+    height: min(80vw, 80vh);
     top: calc(min(10vw, 10vh) - min(0.5vh, 0.5vw));
     border: solid min(0.5vh, 0.5vw) black;
     background: #ffdbad;
@@ -25,67 +25,110 @@
     font-size: min(6vh, 6vw);
     font-family: Chalkboard, serif;
 }
-.food-shop-container {
+.food-shop-top-container-title, .food-shop-bottom-container-title {
+    text-decoration: underline;
+    font-size: min(3vh, 3vw);
+    margin-bottom: min(1vh, 1vw);
+    margin-left: min(3vh, 3vw);
+}
+.food-shop-top-container {
     flex: 1;
     display: flex;
     flex-direction: column;
+    margin-top: min(1.25vh, 1.25vw);
 }
 .food-shop-inventory-container {
     flex: 1;
     display: flex;
     padding-right: min(1vh, 1vw);
     justify-content: space-evenly;
+    margin-top: min(0.25vh, 0.25vw);
 }
 .food-shop-item-box {
     flex: 1;
     border: solid min(0.4vh, 0.4vw) black;
-    margin-top: min(1vh, 1vw);
-    margin-left: min(1vh, 1vw);
-    max-width: min(11vw, 11vh);
-    max-height: min(11vw, 11vh);
+    max-width: min(8vw, 8vh);
+    max-height: min(8vw, 8vh);
     background-size: contain;
     position: relative;
-    cursor: pointer;
 }
-.item-box-name {
-    width: 100%;
+.food-shop-item-box-name {
+    width: min(15vh, 15vw);
+    text-align: center;
+    font-size: min(1.75vh, 1.75vw);
+    position: absolute;
+    top: max(-2.5vh, -2.5vw);
+    left: calc(max(-7.5vh, -7.5vw) + min(4vw, 4vh));
+}
+.food-shop-item-box-value {
+    width: min(30vh, 30vw);
     text-align: center;
     font-size: min(2vh, 2vw);
     position: absolute;
-    top: max(-2.55vh, -2.55vw);
-    left: 0;
+    bottom: max(-2.75vh, -2.75vw);
+    left: calc(max(-15vh, -15vw) + min(4vw, 4vh));
 }
-.food-shop-bottom-container {
+.food-shop-bottom-container-1, .food-shop-bottom-container-2 {
     flex: 1;
     display: flex;
     padding-right: min(1vh, 1vw);
-    justify-content: space-evenly;
-    flex-flow: wrap-reverse;
 }
-.food-shop-buy-item-box {
+.food-shop-bottom-container-1 {
+    justify-content: space-evenly;
+    margin-top: min(1.25vh, 1.25vw);
+    margin-bottom: min(2vh, 2vw);
+}
+.food-shop-bottom-container-2 {
+    justify-content: space-around;
+    margin-top: min(2.75vh, 2.75vw);
+    margin-bottom: min(1.5vh, 1.5vw);
+}
+.food-shop-buy-item-box, .food-shop-buy-item-box-1, .food-shop-buy-item-box-2 {
     flex: 1;
     border: solid min(0.4vh, 0.4vw) black;
-    margin-top: min(1vh, 1vw);
-    margin-left: min(1vh, 1vw);
-    max-width: min(21vw, 21vh);
-    max-height: min(21vw, 21vh);
-    min-width: min(21vw, 21vh);
-    min-height: min(21vw, 21vh);
+    max-width: min(12vw, 12vh);
+    max-height: min(12vw, 12vh);
+    min-width: min(12vw, 12vh);
+    min-height: min(12vw, 12vh);
     background-size: contain;
     position: relative;
     cursor: pointer;
 }
+.food-shop-buy-item-box-1 {
+    margin-left: min(7vh, 7vw);
+}
+.food-shop-buy-item-box-2 {
+    margin-right: min(7vh, 7vw);
+}
 .food-shop-buy-item-box-name {
-    width: 100%;
+    width: min(30vh, 30vw);
     text-align: center;
     font-size: min(2vh, 2vw);
     position: absolute;
-    top: max(-2.55vh, -2.55vw);
-    left: 0;
+    top: max(-2.75vh, -2.75vw);
+    left: calc(max(-15vh, -15vw) + min(6vw, 6vh));
+}
+.food-shop-bottom-container-2 .food-shop-buy-item-box-name {
+    top: max(-3.25vh, -3.25vw);
+}
+.food-shop-buy-item-box-value {
+    width: min(30vh, 30vw);
+    text-align: center;
+    font-size: min(2vh, 2vw);
+    position: absolute;
+    bottom: max(-2.75vh, -2.75vw);
+    left: calc(max(-15vh, -15vw) + min(6vw, 6vh));
+}
+.food-shop-bottom-gold {
+    font-size: min(3vh, 3vw);
+    margin-bottom: min(1vh, 1vw);
+    margin-left: min(3vh, 3vw);
+    margin-top: min(1vh, 1vw);
 }
 .food-shop-close-button {
     height: min(8vh, 8vw);
     margin-left: min(3vh, 3vw);
     padding-left: min(3vh, 3vw);
     padding-right: min(3vh, 3vw);
+    margin-bottom: min(2vh, 2vw);
 }
