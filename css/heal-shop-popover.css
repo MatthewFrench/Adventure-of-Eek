@@ -19,8 +19,19 @@
     flex-direction: column;
     z-index: 10;
 }
-.heal-shop-title {
+.heal-shop-title-container {
     width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.heal-shop-title-image {
+    width: min(8vh, 8vw);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-image: url("../images/heart.png");
+}
+.heal-shop-title {
     text-align: center;
     font-size: min(6vh, 6vw);
     font-family: Chalkboard, serif;

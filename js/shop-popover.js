@@ -7,8 +7,8 @@ export class ShopPopover {
         this.closeButton.onclick = () => {
             this.hide();
         }
-        this.titleImage1 = document.getElementById("shop-title-image-1")
-        this.titleImage2 = document.getElementById("shop-title-image-2")
+        this.titleImage1 = document.getElementById("shop-title-image-1");
+        this.titleImage2 = document.getElementById("shop-title-image-2");
         this.title = document.getElementById("shop-title");
         this.rowContainer = document.getElementById("shop-table-row-container");
         this.goldDiv = document.getElementById("shop-gold");

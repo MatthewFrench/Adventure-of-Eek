@@ -8,6 +8,8 @@ export class FoodShopPopover {
         this.closeButton.onclick = () => {
             this.hide();
         }
+        this.titleImage1 = document.getElementById("food-shop-title-image-1");
+        this.titleImage2 = document.getElementById("food-shop-title-image-2");
         this.title = document.getElementById("food-shop-title");
         this.buyFood0 = ITEM_SUSHI;
         this.buyFood1 = ITEM_CORNED_BEEF_HASH;
@@ -129,6 +131,12 @@ export class FoodShopPopover {
         this.goldDiv.innerText = "Gold: " + this.game.getCurrentGame().gold;
     }
     show() {
+        let image = "utensils.png";
+        if (Math.random() >= 0.9) {
+            image = "utensils-tara.png";
+        }
+        this.titleImage1.style.backgroundImage = "url(\"./images/" + image +"\")";
+        this.titleImage2.style.backgroundImage = "url(\"./images/" + image +"\")";
         this.updateInventoryDisplay();
         this.popover.style.display = "";
     }
