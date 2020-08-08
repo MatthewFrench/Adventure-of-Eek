@@ -19,8 +19,18 @@
     flex-direction: column;
     z-index: 10;
 }
-.shop-title {
+.shop-title-container {
     width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.shop-title-image {
+    width: min(8vh, 8vw);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+.shop-title {
     text-align: center;
     font-size: min(6vh, 6vw);
     font-family: Chalkboard, serif;

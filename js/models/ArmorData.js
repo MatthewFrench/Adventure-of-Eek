@@ -79,7 +79,7 @@ const ARMORS = [ARMOR_CARDBOARD_UNDERWEAR, ARMOR_CROCHETED_CROCS, ARMOR_CARPET_T
 
 export function ShowArmorShop(game) {
     let currentGame = game.getCurrentGame();
-    game.shopPopover.setShopType("Armor");
+    game.shopPopover.setShopType("Armor", "shield.png");
     game.shopPopover.setItems(ARMORS, currentGame.armor);
     UpdateCurrentArmorDisplay(game);
     game.shopPopover.updateGoldDisplay();

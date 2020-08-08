@@ -7,6 +7,8 @@ export class ShopPopover {
         this.closeButton.onclick = () => {
             this.hide();
         }
+        this.titleImage1 = document.getElementById("shop-title-image-1")
+        this.titleImage2 = document.getElementById("shop-title-image-2")
         this.title = document.getElementById("shop-title");
         this.rowContainer = document.getElementById("shop-table-row-container");
         this.goldDiv = document.getElementById("shop-gold");
@@ -26,7 +28,9 @@ export class ShopPopover {
     hide() {
         this.popover.style.display = "none";
     }
-    setShopType(shopType) {
+    setShopType(shopType, image) {
+        this.titleImage1.style.backgroundImage = "url(\"./images/" + image +"\")";
+        this.titleImage2.style.backgroundImage = "url(\"./images/" + image +"\")";
         this.title.innerText = shopType + " Shop";
         this.currentArmorTitle.innerText = "Current " + shopType;
     }
