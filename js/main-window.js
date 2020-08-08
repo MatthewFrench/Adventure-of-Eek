@@ -29,7 +29,7 @@ export class MainWindow {
             ShowWeaponShop(this.game);
         }
         document.getElementById("levelUpButton").onclick = ()  => {
-            AppendExperience(1000, this.game);
+            AppendExperience(10000, this.game);
         }
         document.getElementById("attackButton").onclick = () => {
             this.game.attackPopover.show(CREATURE_BABY_CHICKEN);

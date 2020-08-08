@@ -292,6 +292,7 @@ export class AttackPopover {
         this.game.print("A " + enemyCreatureData.name.toLowerCase() +  " attacks! " + enemyCreatureData.encounterLine);
     }
     hide() {
-        this.popover.style.display = "none"
+        this.popover.style.display = "none";
+        this.game.mainWindow.updateDisplay();
     }
 }
