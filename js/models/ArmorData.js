@@ -8,7 +8,7 @@ const ARMOR_ADAMANTIUM_NOSE_RING = {id:7, name: "Adamantium Nose-ring", rating: 
 const ARMOR_DRIED_DOG_TURD_SUIT = {id:8, name: "Dried Dog-turd Suit", rating: 10, cost: 1650, buyLine: "Did the suit exist before the turds or...?"};
 const ARMOR_TOWEL_OF_INDECENCY = {id:9, name: "Towel of Indecency", rating: 12, cost: 2150, buyLine: "Don't look! This feels like a nightmare I once had."};
 const ARMOR_YELLOW_POLKA_DOT_BIKINI = {id:10, name: "Yellow Polka-dot Bikini", rating: 14, cost: 3100, buyLine: "It was an itsy bitsy teenie weenie... any-who, the less clothing, the more powerful the armor. Right?"};
-const ARMOR_DRAGON_SCALE_FULL_BODY_ARMOR = {id:11, name: "Dragon Scale Full Body Armor", rating: 16, cost: 6400, buyLine: "I have the power of anime on my side."};
+const ARMOR_DRAGON_SCALE_FULL_BODY_ARMOR = {id:11, name: "Dragon Scale Full Body Armor", rating: 16, cost: 6400, buyLine: "You have the power of anime on your side."};
 const ARMORS = [ARMOR_CARDBOARD_UNDERWEAR, ARMOR_CROCHETED_CROCS, ARMOR_CARPET_TSHIRT, ARMOR_WOOD_PANTS, ARMOR_SHINY_NIGHTGOWN, ARMOR_CHRISTMAS_LIGHT_UP_SOCKS, ARMOR_ADAMANTIUM_NOSE_RING, ARMOR_DRIED_DOG_TURD_SUIT, ARMOR_TOWEL_OF_INDECENCY, ARMOR_YELLOW_POLKA_DOT_BIKINI, ARMOR_DRAGON_SCALE_FULL_BODY_ARMOR];
 
 export function ShowArmorShop(game) {

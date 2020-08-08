@@ -93,6 +93,7 @@ export class FoodShopPopover {
         }
         currentGame.gold -= foodItem.cost;
         currentGame.items.push(foodItem);
+        this.game.print("Bought " + foodItem.itemName + " for " + foodItem.cost + " gold. " + foodItem.buyText);
         this.updateInventoryDisplay();
         this.game.mainWindow.updateDisplay();
     }
@@ -103,6 +104,7 @@ export class FoodShopPopover {
         }
         this.game.getCurrentGame().gold += Math.floor(item.cost / 2);
         this.game.getCurrentGame().items.splice(itemIndex, 1);
+        this.game.print("Sold " + item.itemName + " for " + Math.floor(item.cost / 2) + " gold. ");
         this.game.mainWindow.updateDisplay();
         this.updateInventoryDisplay();
     }
