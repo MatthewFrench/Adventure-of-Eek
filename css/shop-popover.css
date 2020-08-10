@@ -18,6 +18,12 @@
     display: flex;
     flex-direction: column;
     z-index: 10;
+
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url("../images/textures/texture-7.jpg");
 }
 .shop-title-container {
     width: 100%;
@@ -34,6 +40,14 @@
     text-align: center;
     font-size: min(6vh, 6vw);
     font-family: Chalkboard, serif;
+
+    color: white;
+    text-shadow:
+            min(0.15vh, 0.15vw) min(0.15vh, 0.15vw) min(0.25vh, 0.25vw) black,
+            max(-0.15vh, -0.15vw) max(-0.15vh, -0.15vw) min(0.25vh, 0.25vw) black,
+            min(0.15vh, 0.15vw) max(-0.15vh, -0.15vw) min(0.25vh, 0.25vw) black,
+            max(-0.15vh, -0.15vw) min(0.15vh, 0.15vw) min(0.25vh, 0.25vw) black,
+            min(0.15vh, 0.15vw) min(0.15vh, 0.15vw) min(0.25vh, 0.25vw) black;
 }
 .shop-container {
     flex: 1;
@@ -60,6 +74,14 @@
     margin-right: min(2vh, 2vw);
     display: flex;
     flex-direction: column;
+
+    color: white;
+    text-shadow:
+            min(0.15vh, 0.15vw) min(0.15vh, 0.15vw) min(0.25vh, 0.25vw) black,
+            max(-0.15vh, -0.15vw) max(-0.15vh, -0.15vw) min(0.25vh, 0.25vw) black,
+            min(0.15vh, 0.15vw) max(-0.15vh, -0.15vw) min(0.25vh, 0.25vw) black,
+            max(-0.15vh, -0.15vw) min(0.15vh, 0.15vw) min(0.25vh, 0.25vw) black,
+            min(0.15vh, 0.15vw) min(0.15vh, 0.15vw) min(0.25vh, 0.25vw) black;
 }
 .shop-current-armor-title {
     width: 100%;
@@ -106,6 +128,14 @@
     flex: 1;
     text-align: center;
     font-size: min(4vh, 4vw);
+
+    color: white;
+    text-shadow:
+            min(0.15vh, 0.15vw) min(0.15vh, 0.15vw) min(0.25vh, 0.25vw) black,
+            max(-0.15vh, -0.15vw) max(-0.15vh, -0.15vw) min(0.25vh, 0.25vw) black,
+            min(0.15vh, 0.15vw) max(-0.15vh, -0.15vw) min(0.25vh, 0.25vw) black,
+            max(-0.15vh, -0.15vw) min(0.15vh, 0.15vw) min(0.25vh, 0.25vw) black,
+            min(0.15vh, 0.15vw) min(0.15vh, 0.15vw) min(0.25vh, 0.25vw) black;
 }
 .shop-close-button {
     height: min(8vh, 8vw);
