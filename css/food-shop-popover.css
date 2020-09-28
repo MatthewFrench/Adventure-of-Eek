@@ -74,6 +74,10 @@
     background-color: white;
     border-radius: min(1vh, 1vw);
 }
+.food-shop-item-box:active {
+    border-color: gray;
+    box-sizing: border-box;
+}
 .food-shop-item-box-name {
     width: min(15vh, 15vw);
     text-align: center;
@@ -116,6 +120,10 @@
     cursor: pointer;
     border-radius: min(2vh, 2vw);
     background-color: #000000a1;
+}
+.food-shop-buy-item-box:active, .food-shop-buy-item-box-1:active, .food-shop-buy-item-box-2:active {
+    border: solid min(0.4vh, 0.4vw) white;
+    box-sizing: border-box;
 }
 .food-shop-buy-item-box-1 {
     margin-left: min(7vh, 7vw);
