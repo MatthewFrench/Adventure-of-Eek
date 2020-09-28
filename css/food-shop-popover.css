@@ -76,7 +76,7 @@
 }
 .food-shop-item-box:active {
     border-color: gray;
-    box-sizing: border-box;
+    user-select: none;
 }
 .food-shop-item-box-name {
     width: min(15vh, 15vw);
@@ -124,6 +124,7 @@
 .food-shop-buy-item-box:active, .food-shop-buy-item-box-1:active, .food-shop-buy-item-box-2:active {
     border: solid min(0.4vh, 0.4vw) white;
     box-sizing: border-box;
+    user-select: none;
 }
 .food-shop-buy-item-box-1 {
     margin-left: min(7vh, 7vw);
