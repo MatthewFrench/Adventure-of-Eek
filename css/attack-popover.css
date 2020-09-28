@@ -18,13 +18,17 @@
     z-index: 10;
     display: flex;
     flex-direction: column;
+
+    background-position: center;
+    background-repeat: repeat;
+    background-size: 100%;
+    background-image: url("../images/textures/texture-15.jpg");
 }
 .attack-enemy-information-container {
     flex: 1;
     display: flex;
 }
 .attack-enemy-image {
-    border: solid 1px black;
     width: min(16vh, 16vw);
     height: min(16vh, 16vw);
     margin-left: min(0.5vh, 0.5vw);

@@ -2,7 +2,8 @@ export class ShopPopover {
     constructor(game) {
         this.game = game;
         this.selectedItemDiv = null;
-        this.popover = document.getElementById("shop-popover-background-cover");
+        this.popoverContainer = document.getElementById("shop-popover-background-cover");
+        this.popover = document.getElementById("shop-popover");
         this.closeButton = document.getElementById("shop-close-button");
         this.closeButton.onclick = () => {
             this.hide();
@@ -23,12 +24,13 @@ export class ShopPopover {
         }
     }
     show() {
-        this.popover.style.display = "";
+        this.popoverContainer.style.display = "";
     }
     hide() {
-        this.popover.style.display = "none";
+        this.popoverContainer.style.display = "none";
     }
-    setShopType(shopType, image) {
+    setShopType(shopType, image, backgroundImage) {
+        this.popover.style.backgroundImage = "url(\"./images/textures/" + backgroundImage +"\")";
         this.titleImage1.style.backgroundImage = "url(\"./images/" + image +"\")";
         this.titleImage2.style.backgroundImage = "url(\"./images/" + image +"\")";
         this.title.innerText = shopType + " Shop";
