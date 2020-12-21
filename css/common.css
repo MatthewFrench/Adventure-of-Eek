@@ -11,7 +11,7 @@ body {
     background-position: center;
     background-repeat: repeat;
     background-size: 100%;
-    background-image: url("../images/textures/texture-11.jpg");
+    background-image: url("../images/textures/grass-background.jpg");
 }
 .button {
     color: white;
