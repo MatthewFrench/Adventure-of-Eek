@@ -1,0 +1,65 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "Map 1.tmx",
+    "expandedProjectPaths": [
+        "."
+    ],
+    "fileStates": {
+        "Basic Tiles.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 0.034,
+            "scaleInEditor": 0.04
+        },
+        "Characters.tsx": {
+            "dynamicWrapping": true
+        },
+        "Map 1.tmx": {
+            "scale": 0.0191,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 27120.41884816754,
+                "y": 11649.214659685862
+            }
+        },
+        "Map 2.tmx": {
+            "scale": 0.018765536221590908,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 10471.323477232407,
+                "y": 10631.191011235955
+            }
+        },
+        "Map.tmx": {
+            "scale": 0.0191,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 10078.534031413612,
+                "y": 10549.738219895287
+            }
+        }
+    },
+    "map.height": 10,
+    "map.lastUsedFormat": "tmx",
+    "map.tileHeight": 2048,
+    "map.tileWidth": 2048,
+    "map.width": 10,
+    "openFiles": [
+        "Basic Tiles.tsx",
+        "Map 1.tmx",
+        "Map 2.tmx"
+    ],
+    "project": "Project.tiled-project",
+    "property.type": "string",
+    "recentFiles": [
+        "Basic Tiles.tsx",
+        "Map 2.tmx",
+        "Map 1.tmx",
+        "Map.tmx"
+    ],
+    "tileset.lastUsedFilter": "Tiled tileset files (*.tsx *.xml)",
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.type": 1
+}
