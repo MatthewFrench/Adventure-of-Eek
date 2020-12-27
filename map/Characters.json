@@ -10,15 +10,15 @@
  "spacing":0,
  "tilecount":1,
  "tiledversion":"1.4.3",
- "tileheight":200,
+ "tileheight":2048,
  "tiles":[
         {
          "id":0,
-         "image":"..\/images\/baby-chicken.png",
-         "imageheight":200,
-         "imagewidth":200
+         "image":"..\/images\/Originals\/baby-chicken.png",
+         "imageheight":2048,
+         "imagewidth":2048
         }],
- "tilewidth":200,
+ "tilewidth":2048,
  "type":"tileset",
  "version":1.4
 }

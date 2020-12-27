@@ -11,19 +11,19 @@
         "Basic Tiles.tsx": {
             "dynamicWrapping": true,
             "scaleInDock": 0.034,
-            "scaleInEditor": 0.04
+            "scaleInEditor": 0.0634
         },
         "Characters.tsx": {
             "dynamicWrapping": true,
             "scaleInDock": 0.9868,
-            "scaleInEditor": 1
+            "scaleInEditor": 0.253
         },
         "Map 1.tmx": {
             "scale": 0.0156,
-            "selectedLayer": 3,
+            "selectedLayer": 5,
             "viewCenter": {
-                "x": 20128.205128205125,
-                "y": 10865.384615384613
+                "x": 12115.384615384615,
+                "y": 8108.9743589743575
             }
         },
         "Map 2.tmx": {
@@ -45,7 +45,7 @@
     },
     "lastUsedTilesetExportFilter": "JSON tileset files (*.json)",
     "map.height": 10,
-    "map.lastUsedExportFilter": "JavaScript map files (*.js)",
+    "map.lastUsedExportFilter": "JSON map files (*.json)",
     "map.lastUsedFormat": "tmx",
     "map.tileHeight": 2048,
     "map.tileWidth": 2048,

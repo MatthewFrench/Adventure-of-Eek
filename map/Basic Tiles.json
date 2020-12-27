@@ -14,37 +14,37 @@
  "tiles":[
         {
          "id":0,
-         "image":"..\/images\/tiles\/flowers.png",
+         "image":"..\/images\/Originals\/tiles\/flowers.png",
          "imageheight":2048,
          "imagewidth":2048
         }, 
         {
          "id":1,
-         "image":"..\/images\/tiles\/grass.png",
+         "image":"..\/images\/Originals\/tiles\/grass.png",
          "imageheight":2048,
          "imagewidth":2048
         }, 
         {
          "id":2,
-         "image":"..\/images\/tiles\/house.png",
+         "image":"..\/images\/Originals\/tiles\/house.png",
          "imageheight":2048,
          "imagewidth":2048
         }, 
         {
          "id":3,
-         "image":"..\/images\/tiles\/tree.png",
+         "image":"..\/images\/Originals\/tiles\/tree.png",
          "imageheight":2048,
          "imagewidth":2048
         }, 
         {
          "id":4,
-         "image":"..\/images\/tiles\/vines.png",
+         "image":"..\/images\/Originals\/tiles\/vines.png",
          "imageheight":2048,
          "imagewidth":2048
         }, 
         {
          "id":5,
-         "image":"..\/images\/tiles\/red.png",
+         "image":"..\/images\/Originals\/tiles\/red.png",
          "imageheight":2048,
          "imagewidth":2048
         }],
