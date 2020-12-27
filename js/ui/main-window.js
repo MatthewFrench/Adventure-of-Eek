@@ -6,6 +6,7 @@ import {CREATURE_BABY_CHICKEN} from "../models/CreatureData.js";
 export class MainWindow {
     constructor(game) {
         this.game = game;
+        this.canvas = document.getElementById("gameview-canvas");
         this.mainTextDiv = document.getElementById("mainTextDiv")
         this.itemsButton = document.getElementById("itemsButton")
         this.itemsButton.onclick = () => {
@@ -40,6 +41,56 @@ export class MainWindow {
         document.getElementById("foodShopButton").onclick = () =>  {
             this.game.foodShopPopover.show();
         }
+        this.updateCanvas();
+    }
+    updateCanvas() {
+        requestAnimationFrame(() => this.updateCanvas());
+        let ctx = this.canvas.getContext("2d");
+        this.canvas.width  = this.canvas.clientWidth;
+        this.canvas.height = this.canvas.clientHeight;
+        let canvasWidth = this.canvas.width;
+        let canvasHeight = this.canvas.height;
+        ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+        ctx.beginPath();
+        ctx.fillStyle = "black";
+        ctx.rect(0, 0, canvasWidth, canvasHeight);
+        ctx.fill();
+        // Draw world
+        let world = this.game.world;
+        let map = world.maps[0];
+        for (const tileLayer of map.tileLayers) {
+            for (let x = tileLayer.minX; x <= tileLayer.maxX; x++) {
+                if (x in tileLayer.tiles) {
+                    let tileX = tileLayer.tiles[x];
+                    for (let y = tileLayer.minY; y <= tileLayer.maxY; y++) {
+                        if (y in tileX) {
+                            let tileId = tileX[y];
+                            // Get the tile image and draw it
+                            let tileImage = map.getTileForMap(tileId);
+                            ctx.drawImage(tileImage, x * 32, y * 32, 32, 32);
+                        }
+                    }
+                }
+            }
+        }
+        /*
+        function animate() {
+  // call again next time we can draw
+  requestAnimationFrame(animate);
+  // clear canvas
+  ctx.clearRect(0, 0, cvWidth, cvHeight);
+  // draw everything
+  everyObject.forEach(function(o) {
+    ctx.fillStyle = o[4];
+    ctx.fillRect(o[0], o[1], o[2], o[3]);
+  });
+  //
+  ctx.fillStyle = '#000';
+  ctx.fillText('click to add random rects', 10, 10);
+}
+
+animate();
+         */
     }
     show() {
         this.updateDisplay();

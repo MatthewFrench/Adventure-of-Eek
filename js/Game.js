@@ -1,21 +1,22 @@
-import {GlobalData} from "./models/GlobalData";
-import {MainWindow} from "./ui/main-window";
-import {NewGameWindow} from "./ui/new-game-window";
-import {LoadGameWindow} from "./ui/load-game-window";
-import {AboutWindow} from "./ui/about-window";
-import {CharacterCreatorWindow} from "./ui/character-creator-window";
-import {ItemsPopover} from "./ui/items-popover";
-import {StatsPopover} from "./ui/stats-popover";
-import {EventPopover} from "./ui/event-popover";
-import {ShopPopover} from "./ui/shop-popover";
-import {AttackPopover} from "./ui/attack-popover";
-import {FoodShopPopover} from "./ui/food-shop-popover";
-import {HealShopPopover} from "./ui/heal-shop-popover";
-import {GameData} from "./models/GameData";
-import {ITEM_SUSHI} from "./models/ItemData";
+import {GlobalData} from "./models/GlobalData.js";
+import {MainWindow} from "./ui/main-window.js";
+import {NewGameWindow} from "./ui/new-game-window.js";
+import {LoadGameWindow} from "./ui/load-game-window.js";
+import {AboutWindow} from "./ui/about-window.js";
+import {CharacterCreatorWindow} from "./ui/character-creator-window.js";
+import {ItemsPopover} from "./ui/items-popover.js";
+import {StatsPopover} from "./ui/stats-popover.js";
+import {EventPopover} from "./ui/event-popover.js";
+import {ShopPopover} from "./ui/shop-popover.js";
+import {AttackPopover} from "./ui/attack-popover.js";
+import {FoodShopPopover} from "./ui/food-shop-popover.js";
+import {HealShopPopover} from "./ui/heal-shop-popover.js";
+import {GameData} from "./models/GameData.js";
+import {ITEM_SUSHI} from "./models/ItemData.js";
 
 export class Game {
-    constructor() {
+    constructor(world) {
+        this.world = world;
         this.globalData = new GlobalData();
         this.mainWindow = new MainWindow(this);
         this.newGameWindow = new NewGameWindow(this);
@@ -42,6 +43,8 @@ export class Game {
         newGame.gold = 100;
         newGame.items.push(ITEM_SUSHI);
         newGame.items.push(ITEM_SUSHI);
+        // Starting map is hardcoded
+        newGame
         this.globalData.currentGame = newGame;
         this.globalData.games.push(newGame);
     }

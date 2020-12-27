@@ -6,23 +6,29 @@ export class Map {
         // We don't pull in the images at this size but we need
         // to know the size to properly scale objects that are
         // recorded as pixel values instead of tile values
-        this.tileWidth = mapJson.tileWidth;
-        this.tileHeight = mapJson.tileHeight
+        this.tileWidth = mapJson.tilewidth;
+        this.tileHeight = mapJson.tileheight;
 
-        // id, name
-        this.tileSets = {};
+        // [{id, name}]
+        this.tileSets = [];
         for (const tileSet of mapJson.tilesets){
-            let gid = tileSet.firstgid;
-            let nameSplit = tileSet.source.split("\\");
+            // This helps identify corresponding tiles in the map
+            let firstGid = tileSet.firstgid;
+            let nameSplit = tileSet.source.split("\/");
             let name = nameSplit[nameSplit.length - 1].split(".tsx")[0];
-            this.tileSets[gid] = name;
+            this.tileSets.push({firstGid: firstGid, name: name});
         }
 
         // Load layers, tiles in layers
         this.tileLayers = [];
         // Collision map
         this.collisionLayer = null;
-        // 
+        // These are specific enemy existence points
+        this.staticEnemies = [];
+        // These are enemy spawn zones
+        this.enemySpawnAreas = [];
+        // These are special properties, player location, shop locations
+        this.properties = [];
         for (const layer of mapJson.layers) {
             if (layer.type === "tilelayer" && layer.name !== "Collision Layer") {
                 this.tileLayers.push(new TileLayer(layer));
@@ -38,6 +44,26 @@ export class Map {
                 console.log("Unknown layer: " + layer.name);
             }
         }
+    }
+    getTileForMap(tileId) {
+        // Find which tileSet has the tileId
+        // Translate the tileId to the
+        // tileSet tileId value
+        // then return the tile image
+        // from the tileSet
+        for (const tileSetPair of this.tileSets) {
+            let firstGid = tileSetPair.firstGid;
+            let tileSetName = name;
+            if (tileId >= firstGid) {
+                // It is this tileset
+                let tileSet = this.tileSets[tileSetName];
+                let translatedTileId = tileId - firstGid;
+                return tileSet.tiles[translatedTileId];
+            }
+        }
+        // Error if this ever happens
+        console.log("Were unable to find tileset for tileId: " + tileId);
+        return null;
     }
 }
 class TileLayer {

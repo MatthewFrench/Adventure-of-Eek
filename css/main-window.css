@@ -9,6 +9,10 @@
     flex: 2;
     border: solid min(0.25vh, 0.25vw) black;
     padding: min(1vh, 1vw);
+    display: flex;
+}
+.gameview-canvas {
+    flex: 1;
 }
 .main-window-statview {
     flex: 1;
