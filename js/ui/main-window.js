@@ -1,7 +1,7 @@
-import {AppendExperience} from "./models/LevelUpData.js";
-import {ShowArmorShop} from "./models/ArmorData.js";
-import {ShowWeaponShop} from "./models/WeaponData.js";
-import {CREATURE_BABY_CHICKEN} from "./models/CreatureData.js";
+import {AppendExperience} from "../models/LevelUpData.js";
+import {ShowArmorShop} from "../models/ArmorData.js";
+import {ShowWeaponShop} from "../models/WeaponData.js";
+import {CREATURE_BABY_CHICKEN} from "../models/CreatureData.js";
 
 export class MainWindow {
     constructor(game) {

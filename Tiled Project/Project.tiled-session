@@ -14,14 +14,16 @@
             "scaleInEditor": 0.04
         },
         "Characters.tsx": {
-            "dynamicWrapping": true
+            "dynamicWrapping": true,
+            "scaleInDock": 0.9868,
+            "scaleInEditor": 1
         },
         "Map 1.tmx": {
-            "scale": 0.0191,
-            "selectedLayer": 2,
+            "scale": 0.0156,
+            "selectedLayer": 3,
             "viewCenter": {
-                "x": 27120.41884816754,
-                "y": 11649.214659685862
+                "x": 20128.205128205125,
+                "y": 10865.384615384613
             }
         },
         "Map 2.tmx": {
@@ -41,7 +43,9 @@
             }
         }
     },
+    "lastUsedTilesetExportFilter": "JSON tileset files (*.json)",
     "map.height": 10,
+    "map.lastUsedExportFilter": "JavaScript map files (*.js)",
     "map.lastUsedFormat": "tmx",
     "map.tileHeight": 2048,
     "map.tileWidth": 2048,
@@ -49,14 +53,15 @@
     "openFiles": [
         "Basic Tiles.tsx",
         "Map 1.tmx",
-        "Map 2.tmx"
+        "Characters.tsx"
     ],
     "project": "Project.tiled-project",
     "property.type": "string",
     "recentFiles": [
         "Basic Tiles.tsx",
-        "Map 2.tmx",
+        "Characters.tsx",
         "Map 1.tmx",
+        "Map 2.tmx",
         "Map.tmx"
     ],
     "tileset.lastUsedFilter": "Tiled tileset files (*.tsx *.xml)",

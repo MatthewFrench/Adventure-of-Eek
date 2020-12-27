@@ -1,4 +1,4 @@
-import {ITEM_CORNED_BEEF_HASH, ITEM_EARL_GREY_TEA, ITEM_SPAGHETTI, ITEM_SPINACH, ITEM_SUSHI} from "./models/ItemData.js";
+import {ITEM_CORNED_BEEF_HASH, ITEM_EARL_GREY_TEA, ITEM_SPAGHETTI, ITEM_SPINACH, ITEM_SUSHI} from "../models/ItemData.js";
 
 export class FoodShopPopover {
     constructor(game) {

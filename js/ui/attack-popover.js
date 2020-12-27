@@ -1,4 +1,4 @@
-import {AppendExperience} from "./models/LevelUpData.js";
+import {AppendExperience} from "../models/LevelUpData.js";
 
 export class AttackPopover {
     constructor(game) {

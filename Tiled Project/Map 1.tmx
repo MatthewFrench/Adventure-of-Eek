@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="10" height="10" tilewidth="2048" tileheight="2048" infinite="1" nextlayerid="7" nextobjectid="12">
+<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="10" height="10" tilewidth="2048" tileheight="2048" infinite="1" nextlayerid="8" nextobjectid="18">
  <tileset firstgid="1" source="Basic Tiles.tsx"/>
  <tileset firstgid="7" source="Characters.tsx"/>
  <layer id="1" name="Ground Layer" width="10" height="10">
@@ -123,15 +123,47 @@
   </data>
  </layer>
  <objectgroup id="4" name="Enemy Layer">
-  <object id="6" gid="7" x="22528" y="6144" width="2048" height="2048"/>
-  <object id="7" gid="7" x="36864" y="4096" width="2048" height="2048"/>
-  <object id="11" x="21474.4" y="23974.4"/>
+  <object id="6" name="baby-chicken" gid="7" x="22528" y="6144" width="2048" height="2048"/>
+  <object id="7" name="baby-chicken" gid="7" x="36864" y="4096" width="2048" height="2048"/>
  </objectgroup>
  <objectgroup id="6" name="Enemy Spawn Layer">
-  <object id="10" x="20480" y="0" width="20480" height="20480">
+  <object id="10" name="Spawn Zone" x="20480" y="0" width="20480" height="20480">
    <properties>
-    <property name="enemy1" value="baby-chicken"/>
+    <property name="enemy[1]" value="baby-chicken"/>
+    <property name="spawn-frequency" type="float" value="5"/>
    </properties>
   </object>
+ </objectgroup>
+ <objectgroup id="7" name="Properties Layer">
+  <object id="12" name="Player Start" x="10240" y="8192" width="2048" height="2048">
+   <properties>
+    <property name="property" value="player-start"/>
+   </properties>
+  </object>
+  <object id="13" name="Food Shop" x="6144" y="6144" width="2048" height="2048">
+   <properties>
+    <property name="property" value="shop"/>
+    <property name="shop" value="food"/>
+   </properties>
+  </object>
+  <object id="14" name="Heal Shop" x="14336" y="4096" width="2048" height="2048">
+   <properties>
+    <property name="property" value="shop"/>
+    <property name="shop" value="heal"/>
+   </properties>
+  </object>
+  <object id="15" name="Armor Shop" x="14336" y="12288" width="2048" height="2048">
+   <properties>
+    <property name="property" value="shop"/>
+    <property name="shop" value="armor"/>
+   </properties>
+  </object>
+  <object id="16" name="Weapon Shop" x="8192" y="12288" width="2048" height="2048">
+   <properties>
+    <property name="property" value="shop"/>
+    <property name="shop" value="weapon"/>
+   </properties>
+  </object>
+  <object id="17" x="14871.8" y="15192.3"/>
  </objectgroup>
 </map>

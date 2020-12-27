@@ -1,4 +1,4 @@
-import {UseItem} from "./models/ItemData.js";
+import {UseItem} from "../models/ItemData.js";
 
 export class ItemsPopover {
     constructor(game) {
