@@ -108,7 +108,6 @@ export class MainWindow {
                             let drawX = (x + cameraX) * TILE_DISPLAY_SIZE;
                             let drawY = (y + cameraY) * TILE_DISPLAY_SIZE;
                             ctx.drawImage(tileImage, drawX, drawY, TILE_DISPLAY_SIZE, TILE_DISPLAY_SIZE);
-                            ctx.fillText(x + "," + y, drawX, drawY);
                         }
                     }
                 }
