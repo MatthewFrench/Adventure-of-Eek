@@ -44,17 +44,34 @@ export class MainWindow {
         }
         this.isShowing = false;
     }
+
+    getContext() {
+        let canvas = this.canvas;
+        // Get the device pixel ratio, falling back to 1.
+        let dpr = window.devicePixelRatio || 1;
+        // Get the size of the canvas in CSS pixels.
+        let rect = canvas.getBoundingClientRect();
+        // Give the canvas pixel dimensions of their CSS
+        // size * the device pixel ratio.
+        canvas.width = rect.width * dpr;
+        canvas.height = rect.height * dpr;
+        let ctx = canvas.getContext('2d');
+        // Scale all drawing operations by the dpr, so you
+        // don't have to worry about the difference.
+        ctx.scale(dpr, dpr);
+        return ctx;
+    }
+
     updateCanvas() {
         if (!this.isShowing) {
             return;
         }
         requestAnimationFrame(() => this.updateCanvas());
         let currentGame = this.game.getCurrentGame();
-        let ctx = this.canvas.getContext("2d");
-        this.canvas.width  = this.canvas.clientWidth;
-        this.canvas.height = this.canvas.clientHeight;
-        let canvasWidth = this.canvas.width;
-        let canvasHeight = this.canvas.height;
+        let ctx = this.getContext();
+        let bounds = this.canvas.getBoundingClientRect();
+        let canvasWidth = bounds.width;
+        let canvasHeight = bounds.height;
         let tilesHorizontalHalf = Math.ceil(canvasWidth / TILE_DISPLAY_SIZE / 2);
         let tilesVerticalHalf = Math.ceil(canvasHeight / TILE_DISPLAY_SIZE / 2);
         let minX = currentGame.x - tilesHorizontalHalf;
