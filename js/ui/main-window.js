@@ -4,6 +4,8 @@ import {ShowWeaponShop} from "../models/WeaponData.js";
 import {CREATURE_BABY_CHICKEN} from "../models/CreatureData.js";
 
 const TILE_DISPLAY_SIZE = 32;
+const MAP_TILE_WIDTH = 10;
+const MAP_TILE_HEIGHT = 10;
 export class MainWindow {
     constructor(game) {
         this.game = game;
@@ -69,19 +71,26 @@ export class MainWindow {
         requestAnimationFrame(() => this.updateCanvas());
         let currentGame = this.game.getCurrentGame();
         let ctx = this.getContext();
+        // Scale the display to show 10 tiles no matter screen size
         let bounds = this.canvas.getBoundingClientRect();
         let canvasWidth = bounds.width;
         let canvasHeight = bounds.height;
-        let tilesHorizontalHalf = Math.ceil(canvasWidth / TILE_DISPLAY_SIZE / 2);
-        let tilesVerticalHalf = Math.ceil(canvasHeight / TILE_DISPLAY_SIZE / 2);
-        let minX = currentGame.x - tilesHorizontalHalf;
-        let maxX = currentGame.x + tilesHorizontalHalf;
-        let minY = currentGame.y - tilesVerticalHalf;
-        let maxY = currentGame.y + tilesVerticalHalf;
-        ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+        // Limit view to 10 tiles
+        let targetWidth = MAP_TILE_WIDTH * TILE_DISPLAY_SIZE;
+        let targetHeight = MAP_TILE_HEIGHT * TILE_DISPLAY_SIZE;
+        ctx.scale(canvasWidth / targetWidth, canvasHeight / targetHeight);
+        let mapX = Math.floor(currentGame.x / MAP_TILE_WIDTH);
+        let mapY = Math.floor(currentGame.x / MAP_TILE_HEIGHT);
+        let cameraX = mapX * MAP_TILE_WIDTH;
+        let cameraY = mapY * MAP_TILE_HEIGHT;
+        let minX = cameraX;
+        let maxX = cameraX + MAP_TILE_WIDTH;
+        let minY = cameraY;
+        let maxY = cameraY + MAP_TILE_HEIGHT;
+        ctx.clearRect(0, 0, targetWidth, targetHeight);
         ctx.beginPath();
         ctx.fillStyle = "black";
-        ctx.rect(0, 0, canvasWidth, canvasHeight);
+        ctx.rect(0, 0, targetWidth, targetHeight);
         ctx.fill();
         ctx.fillStyle = "red";
         // Draw world
@@ -96,8 +105,8 @@ export class MainWindow {
                             let tileId = tileX[y];
                             // Get the tile image and draw it
                             let tileImage = world.getTileForMap(map, tileId);
-                            let drawX = x * TILE_DISPLAY_SIZE + (canvasWidth / 2);
-                            let drawY = y * TILE_DISPLAY_SIZE + (canvasHeight / 2);
+                            let drawX = (x + cameraX) * TILE_DISPLAY_SIZE;
+                            let drawY = (y + cameraY) * TILE_DISPLAY_SIZE;
                             ctx.drawImage(tileImage, drawX, drawY, TILE_DISPLAY_SIZE, TILE_DISPLAY_SIZE);
                             ctx.fillText(x + "," + y, drawX, drawY);
                         }
@@ -105,24 +114,6 @@ export class MainWindow {
                 }
             }
         }
-        /*
-        function animate() {
-  // call again next time we can draw
-  requestAnimationFrame(animate);
-  // clear canvas
-  ctx.clearRect(0, 0, cvWidth, cvHeight);
-  // draw everything
-  everyObject.forEach(function(o) {
-    ctx.fillStyle = o[4];
-    ctx.fillRect(o[0], o[1], o[2], o[3]);
-  });
-  //
-  ctx.fillStyle = '#000';
-  ctx.fillText('click to add random rects', 10, 10);
-}
-
-animate();
-         */
     }
     show() {
         this.updateDisplay();
