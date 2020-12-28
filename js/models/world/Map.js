@@ -11,13 +11,11 @@ export class Map {
 
         // [{id, name}]
         this.tileSets = [];
-        this.tileSetsHashMap = {};
         for (const tileSet of mapJson.tilesets){
             // This helps identify corresponding tiles in the map
             let firstGid = tileSet.firstgid;
             let nameSplit = tileSet.source.split("\/");
             let name = nameSplit[nameSplit.length - 1].split(".tsx")[0];
-            this.tileSets[name] = firstGid;
             this.tileSets.push({firstGid: firstGid, name: name});
         }
 
@@ -73,6 +71,7 @@ class TileLayer {
                 x += 1;
                 if (x >= chunkWidth) {
                     x -= chunkWidth;
+                    y += 1;
                 }
             }
         }

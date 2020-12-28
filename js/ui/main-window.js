@@ -3,6 +3,7 @@ import {ShowArmorShop} from "../models/ArmorData.js";
 import {ShowWeaponShop} from "../models/WeaponData.js";
 import {CREATURE_BABY_CHICKEN} from "../models/CreatureData.js";
 
+const TILE_DISPLAY_SIZE = 32;
 export class MainWindow {
     constructor(game) {
         this.game = game;
@@ -48,12 +49,18 @@ export class MainWindow {
             return;
         }
         requestAnimationFrame(() => this.updateCanvas());
+        let currentGame = this.game.getCurrentGame();
         let ctx = this.canvas.getContext("2d");
         this.canvas.width  = this.canvas.clientWidth;
         this.canvas.height = this.canvas.clientHeight;
         let canvasWidth = this.canvas.width;
         let canvasHeight = this.canvas.height;
-        //let minX = this.game.x
+        let tilesHorizontalHalf = Math.ceil(canvasWidth / TILE_DISPLAY_SIZE / 2);
+        let tilesVerticalHalf = Math.ceil(canvasHeight / TILE_DISPLAY_SIZE / 2);
+        let minX = currentGame.x - tilesHorizontalHalf;
+        let maxX = currentGame.x + tilesHorizontalHalf;
+        let minY = currentGame.y - tilesVerticalHalf;
+        let maxY = currentGame.y + tilesVerticalHalf;
         ctx.clearRect(0, 0, canvasWidth, canvasHeight);
         ctx.beginPath();
         ctx.fillStyle = "black";
@@ -62,19 +69,20 @@ export class MainWindow {
         ctx.fillStyle = "red";
         // Draw world
         let world = this.game.world;
-        let currentGame = this.game.getCurrentGame();
         let map = world.maps[currentGame.currentMap];
         for (const tileLayer of map.tileLayers) {
-            for (let x = tileLayer.minX; x <= tileLayer.maxX; x++) {
+            for (let x = minX; x <= maxX; x++) {
                 if (x in tileLayer.tiles) {
                     let tileX = tileLayer.tiles[x];
-                    for (let y = tileLayer.minY; y <= tileLayer.maxY; y++) {
+                    for (let y = minY; y <= maxY; y++) {
                         if (y in tileX) {
                             let tileId = tileX[y];
                             // Get the tile image and draw it
                             let tileImage = world.getTileForMap(map, tileId);
-                            ctx.drawImage(tileImage, x * 32, (map.height - y) * 32, 32, 32);
-                            ctx.fillText(x + "," + y, x * 32, (map.height - y) * 32);
+                            let drawX = x * TILE_DISPLAY_SIZE + (canvasWidth / 2);
+                            let drawY = y * TILE_DISPLAY_SIZE + (canvasHeight / 2);
+                            ctx.drawImage(tileImage, drawX, drawY, TILE_DISPLAY_SIZE, TILE_DISPLAY_SIZE);
+                            ctx.fillText(x + "," + y, drawX, drawY);
                         }
                     }
                 }
