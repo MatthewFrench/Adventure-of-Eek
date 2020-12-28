@@ -45,6 +45,9 @@ export class MainWindow {
             this.game.foodShopPopover.show();
         }
         this.isShowing = false;
+        // Should make a better place for this, game resources
+        this.mainCharacterImage = new Image();
+        this.mainCharacterImage.src = "images/main-character.png";
     }
 
     getContext() {
@@ -113,6 +116,10 @@ export class MainWindow {
                 }
             }
         }
+        // Draw main character
+        let drawX = (currentGame.x + cameraX) * TILE_DISPLAY_SIZE;
+        let drawY = (currentGame.y + cameraY) * TILE_DISPLAY_SIZE;
+        ctx.drawImage(this.mainCharacterImage, drawX, drawY, TILE_DISPLAY_SIZE, TILE_DISPLAY_SIZE);
     }
     show() {
         this.updateDisplay();
