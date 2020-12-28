@@ -44,7 +44,10 @@ export class Game {
         newGame.items.push(ITEM_SUSHI);
         newGame.items.push(ITEM_SUSHI);
         // Starting map is hardcoded
-        newGame
+        newGame.currentMap = "Map 1";
+        // Should set starting position from the map property
+        newGame.x = 0;
+        newGame.y = 0;
         this.globalData.currentGame = newGame;
         this.globalData.games.push(newGame);
     }

@@ -8,6 +8,9 @@
         "."
     ],
     "fileStates": {
+        "": {
+            "scaleInDock": 1
+        },
         "Basic Tiles.tsx": {
             "dynamicWrapping": true,
             "scaleInDock": 0.034,
@@ -16,15 +19,18 @@
         "Characters.tsx": {
             "dynamicWrapping": true,
             "scaleInDock": 0.9868,
-            "scaleInEditor": 0.253
+            "scaleInEditor": 0.1133
         },
         "Map 1.tmx": {
             "scale": 0.0156,
-            "selectedLayer": 5,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": 12115.384615384615,
-                "y": 8108.9743589743575
+                "x": 12211.538461538461,
+                "y": 17275.641025641024
             }
+        },
+        "Map 1.tmx#Basic Tiles": {
+            "dynamicWrapping": true
         },
         "Map 2.tmx": {
             "scale": 0.018765536221590908,

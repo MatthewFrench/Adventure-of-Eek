@@ -11,11 +11,13 @@ export class Map {
 
         // [{id, name}]
         this.tileSets = [];
+        this.tileSetsHashMap = {};
         for (const tileSet of mapJson.tilesets){
             // This helps identify corresponding tiles in the map
             let firstGid = tileSet.firstgid;
             let nameSplit = tileSet.source.split("\/");
             let name = nameSplit[nameSplit.length - 1].split(".tsx")[0];
+            this.tileSets[name] = firstGid;
             this.tileSets.push({firstGid: firstGid, name: name});
         }
 
@@ -44,26 +46,6 @@ export class Map {
                 console.log("Unknown layer: " + layer.name);
             }
         }
-    }
-    getTileForMap(tileId) {
-        // Find which tileSet has the tileId
-        // Translate the tileId to the
-        // tileSet tileId value
-        // then return the tile image
-        // from the tileSet
-        for (const tileSetPair of this.tileSets) {
-            let firstGid = tileSetPair.firstGid;
-            let tileSetName = name;
-            if (tileId >= firstGid) {
-                // It is this tileset
-                let tileSet = this.tileSets[tileSetName];
-                let translatedTileId = tileId - firstGid;
-                return tileSet.tiles[translatedTileId];
-            }
-        }
-        // Error if this ever happens
-        console.log("Were unable to find tileset for tileId: " + tileId);
-        return null;
     }
 }
 class TileLayer {

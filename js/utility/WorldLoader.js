@@ -6,8 +6,9 @@ import {TileSet} from "../models/world/TileSet.js";
 
 let mapNames = ["Map 1"];
 let tileSetNames = ["Basic Tiles", "Characters"];
-export async function LoadWorld () {
-    let maps = [];
+
+export async function LoadWorld() {
+    let maps = {};
     for (const mapName of mapNames) {
         // Loading code for the JSON
         // Need to make async loading with promises.
@@ -17,7 +18,7 @@ export async function LoadWorld () {
         await fetch("map/" + mapName + ".json")
             .then(response => response.json())
             .then(data => {
-                maps.push(new Map(mapName, data));
+                maps[mapName] = new Map(mapName, data);
             });
     }
     let tileSets = {};

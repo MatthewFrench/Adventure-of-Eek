@@ -5,7 +5,7 @@
  </editorsettings>
  <tileset firstgid="1" source="Basic Tiles.tsx"/>
  <tileset firstgid="7" source="Characters.tsx"/>
- <layer id="1" name="Ground Layer" width="10" height="10">
+ <layer id="1" name="Ground Layer" width="10" height="10" locked="1">
   <data encoding="csv">
    <chunk x="0" y="0" width="16" height="16">
 2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,
@@ -45,7 +45,7 @@
 </chunk>
   </data>
  </layer>
- <layer id="2" name="Above Layer 1" width="10" height="10">
+ <layer id="2" name="Above Layer 1" width="10" height="10" locked="1">
   <data encoding="csv">
    <chunk x="0" y="0" width="16" height="16">
 1,1,1,1,1,1,1,1,1,1,4,4,4,4,4,4,
@@ -85,7 +85,7 @@
 </chunk>
   </data>
  </layer>
- <layer id="3" name="Collision Layer" width="10" height="10" visible="0">
+ <layer id="3" name="Collision Layer" width="10" height="10">
   <data encoding="csv">
    <chunk x="0" y="0" width="16" height="16">
 6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,
@@ -167,6 +167,5 @@
     <property name="shop" value="weapon"/>
    </properties>
   </object>
-  <object id="17" x="14871.8" y="15192.3"/>
  </objectgroup>
 </map>

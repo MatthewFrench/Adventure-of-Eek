@@ -41,23 +41,29 @@ export class MainWindow {
         document.getElementById("foodShopButton").onclick = () =>  {
             this.game.foodShopPopover.show();
         }
-        this.updateCanvas();
+        this.isShowing = false;
     }
     updateCanvas() {
+        if (!this.isShowing) {
+            return;
+        }
         requestAnimationFrame(() => this.updateCanvas());
         let ctx = this.canvas.getContext("2d");
         this.canvas.width  = this.canvas.clientWidth;
         this.canvas.height = this.canvas.clientHeight;
         let canvasWidth = this.canvas.width;
         let canvasHeight = this.canvas.height;
+        //let minX = this.game.x
         ctx.clearRect(0, 0, canvasWidth, canvasHeight);
         ctx.beginPath();
         ctx.fillStyle = "black";
         ctx.rect(0, 0, canvasWidth, canvasHeight);
         ctx.fill();
+        ctx.fillStyle = "red";
         // Draw world
         let world = this.game.world;
-        let map = world.maps[0];
+        let currentGame = this.game.getCurrentGame();
+        let map = world.maps[currentGame.currentMap];
         for (const tileLayer of map.tileLayers) {
             for (let x = tileLayer.minX; x <= tileLayer.maxX; x++) {
                 if (x in tileLayer.tiles) {
@@ -66,8 +72,9 @@ export class MainWindow {
                         if (y in tileX) {
                             let tileId = tileX[y];
                             // Get the tile image and draw it
-                            let tileImage = map.getTileForMap(tileId);
-                            ctx.drawImage(tileImage, x * 32, y * 32, 32, 32);
+                            let tileImage = world.getTileForMap(map, tileId);
+                            ctx.drawImage(tileImage, x * 32, (map.height - y) * 32, 32, 32);
+                            ctx.fillText(x + "," + y, x * 32, (map.height - y) * 32);
                         }
                     }
                 }
@@ -95,6 +102,13 @@ animate();
     show() {
         this.updateDisplay();
         this.window.style.display = "";
+        // Start redraw loop
+        this.isShowing = true;
+        this.updateCanvas();
+    }
+    hide() {
+        this.isShowing = false;
+        this.window.style.display = "display: none";
     }
     updateDisplay() {
         this.healthDiv.innerText = "Health: " + this.game.getCurrentGame().currentHealth + "/" + this.game.getCurrentGame().health;
