@@ -29,6 +29,8 @@ export class Map {
         this.enemySpawnAreas = [];
         // These are special properties, player location, shop locations
         this.properties = [];
+        this.playerStartX = 0;
+        this.playerStartY = 0;
         for (const layer of mapJson.layers) {
             if (layer.type === "tilelayer" && layer.name !== "Collision Layer") {
                 this.tileLayers.push(new TileLayer(layer));
@@ -39,12 +41,25 @@ export class Map {
             } else if (layer.type === "objectgroup" && layer.name === "Enemy Spawn Layer") {
 
             } else if (layer.type === "objectgroup" && layer.name === "Properties Layer") {
-
+                for (const object of layer.objects) {
+                    if (HasPropertyName(object.properties, "player-start")) {
+                        this.playerStartX = Math.round(object.x / this.tileWidth);
+                        this.playerStartY = Math.round(object.y / this.tileHeight);
+                    }
+                }
             } else {
                 console.log("Unknown layer: " + layer.name);
             }
         }
     }
+}
+function HasPropertyName(properties, propertyName) {
+    for (const property of properties) {
+        if (property.name === "property" && property.value === propertyName) {
+            return true;
+        }
+    }
+    return false;
 }
 class TileLayer {
     constructor(layer) {
