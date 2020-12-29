@@ -13,10 +13,12 @@ import {FoodShopPopover} from "./ui/food-shop-popover.js";
 import {HealShopPopover} from "./ui/heal-shop-popover.js";
 import {GameData} from "./models/GameData.js";
 import {ITEM_SUSHI} from "./models/ItemData.js";
+import {EventTracker} from "./utility/EventTracker.js";
 
 export class Game {
     constructor(world) {
         this.world = world;
+        this.eventTracker = new EventTracker();
         this.globalData = new GlobalData();
         this.mainWindow = new MainWindow(this);
         this.newGameWindow = new NewGameWindow(this);

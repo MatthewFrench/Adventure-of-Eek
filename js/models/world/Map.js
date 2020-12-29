@@ -52,6 +52,14 @@ export class Map {
             }
         }
     }
+    isCollisionTile(x, y) {
+        if (x in this.collisionLayer.tiles) {
+            if (this.collisionLayer.tiles[x][y]) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
 function HasPropertyName(properties, propertyName) {
     for (const property of properties) {
@@ -120,6 +128,7 @@ class CollisionLayer {
                 x += 1;
                 if (x >= chunkWidth) {
                     x -= chunkWidth;
+                    y += 1;
                 }
             }
         }

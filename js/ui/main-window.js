@@ -6,6 +6,7 @@ import {CREATURE_BABY_CHICKEN} from "../models/CreatureData.js";
 const TILE_DISPLAY_SIZE = 32;
 const MAP_TILE_WIDTH = 10;
 const MAP_TILE_HEIGHT = 10;
+const MOVE_DELAY_SECONDS = 0.15;
 export class MainWindow {
     constructor(game) {
         this.game = game;
@@ -48,6 +49,8 @@ export class MainWindow {
         // Should make a better place for this, game resources
         this.mainCharacterImage = new Image();
         this.mainCharacterImage.src = "images/main-character.png";
+        // Time tracking
+        this.lastPlayerMove = 0;
     }
 
     getContext() {
@@ -67,11 +70,59 @@ export class MainWindow {
         return ctx;
     }
 
-    updateCanvas() {
+    runOverworldLogic(timestamp) {
+        let currentGame = this.game.getCurrentGame();
+        let world = this.game.world;
+        let map = world.maps[currentGame.currentMap];
+        // Todo, make a time tracking class for easy
+        // world time tracking, like character movement
+        const elapsed = timestamp - this.lastPlayerMove;
+        if (elapsed > MOVE_DELAY_SECONDS * 1000 && (this.game.eventTracker.up || this.game.eventTracker.left || this.game.eventTracker.down || this.game.eventTracker.right)) {
+            let moveDeltaX = 0;
+            let moveDeltaY = 0;
+            let moved = false;
+            if (!moved && (this.game.eventTracker.left || this.game.eventTracker.right)) {
+                if (this.game.eventTracker.left) {
+                    moveDeltaX -= 1;
+                }
+                if (this.game.eventTracker.right) {
+                    moveDeltaX += 1;
+                }
+                // Check for collisions in new position
+                if (!map.isCollisionTile(currentGame.x + moveDeltaX, currentGame.y)) {
+                    currentGame.x += moveDeltaX;
+                    moved = true;
+                }
+            }
+            if (!moved && (this.game.eventTracker.up || this.game.eventTracker.down)) {
+                if (this.game.eventTracker.up) {
+                    moveDeltaY -= 1;
+                }
+                if (this.game.eventTracker.down) {
+                    moveDeltaY += 1;
+                }
+                // Check for collisions in new position
+                if (!map.isCollisionTile(currentGame.x, currentGame.y + moveDeltaY)) {
+                    currentGame.y += moveDeltaY;
+                    moved = true;
+                }
+            }
+            // Check for collisions in new position
+            if (moved) {
+                this.lastPlayerMove = timestamp;
+            }
+        }
+    }
+
+    updateCanvas(timestamp) {
         if (!this.isShowing) {
             return;
         }
-        requestAnimationFrame(() => this.updateCanvas());
+        requestAnimationFrame((timestamp) => this.updateCanvas(timestamp));
+
+        // run logic
+        this.runOverworldLogic(timestamp);
+
         let currentGame = this.game.getCurrentGame();
         let ctx = this.getContext();
         // Scale the display to show 10 tiles no matter screen size
@@ -83,7 +134,7 @@ export class MainWindow {
         let targetHeight = MAP_TILE_HEIGHT * TILE_DISPLAY_SIZE;
         ctx.scale(canvasWidth / targetWidth, canvasHeight / targetHeight);
         let mapX = Math.floor(currentGame.x / MAP_TILE_WIDTH);
-        let mapY = Math.floor(currentGame.x / MAP_TILE_HEIGHT);
+        let mapY = Math.floor(currentGame.y / MAP_TILE_HEIGHT);
         let cameraX = mapX * MAP_TILE_WIDTH;
         let cameraY = mapY * MAP_TILE_HEIGHT;
         let minX = cameraX;
@@ -108,8 +159,8 @@ export class MainWindow {
                             let tileId = tileX[y];
                             // Get the tile image and draw it
                             let tileImage = world.getTileForMap(map, tileId);
-                            let drawX = (x + cameraX) * TILE_DISPLAY_SIZE;
-                            let drawY = (y + cameraY) * TILE_DISPLAY_SIZE;
+                            let drawX = (x - cameraX) * TILE_DISPLAY_SIZE;
+                            let drawY = (y - cameraY) * TILE_DISPLAY_SIZE;
                             ctx.drawImage(tileImage, drawX, drawY, TILE_DISPLAY_SIZE, TILE_DISPLAY_SIZE);
                         }
                     }
@@ -117,8 +168,8 @@ export class MainWindow {
             }
         }
         // Draw main character
-        let drawX = (currentGame.x + cameraX) * TILE_DISPLAY_SIZE;
-        let drawY = (currentGame.y + cameraY) * TILE_DISPLAY_SIZE;
+        let drawX = (currentGame.x - cameraX) * TILE_DISPLAY_SIZE;
+        let drawY = (currentGame.y - cameraY) * TILE_DISPLAY_SIZE;
         ctx.drawImage(this.mainCharacterImage, drawX, drawY, TILE_DISPLAY_SIZE, TILE_DISPLAY_SIZE);
     }
     show() {
@@ -127,6 +178,7 @@ export class MainWindow {
         // Start redraw loop
         this.isShowing = true;
         this.updateCanvas();
+        requestAnimationFrame((timestamp) => this.updateCanvas(timestamp));
     }
     hide() {
         this.isShowing = false;
