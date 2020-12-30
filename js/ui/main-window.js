@@ -28,23 +28,11 @@ export class MainWindow {
         this.experienceDiv = document.getElementById( "main-window-statview-stat-experience")
         this.levelDiv = document.getElementById( "main-window-statview-stat-level")
         this.goldDiv = document.getElementById( "main-window-statview-stat-gold")
-        document.getElementById("armorShopButton").onclick = () => {
-            ShowArmorShop(this.game);
-        }
-        document.getElementById("weaponShopButton").onclick = () => {
-            ShowWeaponShop(this.game);
-        }
         document.getElementById("levelUpButton").onclick = ()  => {
             AppendExperience(10000, this.game);
         }
         document.getElementById("attackButton").onclick = () => {
             this.game.attackPopover.show(CREATURE_BABY_CHICKEN);
-        }
-        document.getElementById("healShopButton").onclick = () =>  {
-            this.game.healShopPopover.show();
-        }
-        document.getElementById("foodShopButton").onclick = () =>  {
-            this.game.foodShopPopover.show();
         }
         this.isShowing = false;
         // Should make a better place for this, game resources
@@ -79,38 +67,55 @@ export class MainWindow {
         // world time tracking, like character movement
         const elapsed = timestamp - this.lastPlayerMove;
         if (elapsed > MOVE_DELAY_SECONDS * 1000 && (this.game.eventTracker.up || this.game.eventTracker.left || this.game.eventTracker.down || this.game.eventTracker.right)) {
-            let moveDeltaX = 0;
-            let moveDeltaY = 0;
+            let targetTileX = currentGame.x;
+            let targetTileY = currentGame.y;
             let moved = false;
-            if (!moved && (this.game.eventTracker.left || this.game.eventTracker.right)) {
+            if (this.game.eventTracker.left || this.game.eventTracker.right) {
                 if (this.game.eventTracker.left) {
-                    moveDeltaX -= 1;
+                    targetTileX -= 1;
                 }
                 if (this.game.eventTracker.right) {
-                    moveDeltaX += 1;
+                    targetTileX += 1;
                 }
                 // Check for collisions in new position
-                if (!map.isCollisionTile(currentGame.x + moveDeltaX, currentGame.y)) {
-                    currentGame.x += moveDeltaX;
+                if (!map.isCollisionTile(targetTileX, currentGame.y)) {
+                    currentGame.x = targetTileX;
                     moved = true;
                 }
             }
-            if (!moved && (this.game.eventTracker.up || this.game.eventTracker.down)) {
+            if (this.game.eventTracker.up || this.game.eventTracker.down) {
                 if (this.game.eventTracker.up) {
-                    moveDeltaY -= 1;
+                    targetTileY -= 1;
                 }
                 if (this.game.eventTracker.down) {
-                    moveDeltaY += 1;
+                    targetTileY += 1;
                 }
                 // Check for collisions in new position
-                if (!map.isCollisionTile(currentGame.x, currentGame.y + moveDeltaY)) {
-                    currentGame.y += moveDeltaY;
+                if (!map.isCollisionTile(currentGame.x, targetTileY)) {
+                    currentGame.y = targetTileY;
                     moved = true;
                 }
             }
             // Check for collisions in new position
             if (moved) {
                 this.lastPlayerMove = timestamp;
+            }
+            // Check collisions when attempting to move to
+            // the target tile
+            // First check special properties of the tile
+            let propertiesOfTile = map.getPropertiesByTile(targetTileX, targetTileY);
+            for (const property of propertiesOfTile) {
+                if (property.name === "shop") {
+                    if (property.attributes["shop"] === "weapon") {
+                        ShowWeaponShop(this.game);
+                    } else if (property.attributes["shop"] === "armor") {
+                        ShowArmorShop(this.game);
+                    } else if (property.attributes["shop"] === "food") {
+                        this.game.foodShopPopover.show();
+                    } else if (property.attributes["shop"] === "heal") {
+                        this.game.healShopPopover.show();
+                    }
+                }
             }
         }
         if (!this.game.eventTracker.up && !this.game.eventTracker.left && !this.game.eventTracker.down && !this.game.eventTracker.right) {

@@ -14,19 +14,19 @@
         "Basic Tiles.tsx": {
             "dynamicWrapping": true,
             "scaleInDock": 0.034,
-            "scaleInEditor": 0.0634
+            "scaleInEditor": 0.06
         },
         "Characters.tsx": {
             "dynamicWrapping": true,
             "scaleInDock": 0.9868,
-            "scaleInEditor": 0.1133
+            "scaleInEditor": 0.06
         },
         "Map 1.tmx": {
-            "scale": 0.0156,
+            "scale": 0.015625,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 12211.538461538461,
-                "y": 17275.641025641024
+                "x": 22240,
+                "y": 12000
             }
         },
         "Map 1.tmx#Basic Tiles": {

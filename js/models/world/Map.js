@@ -29,6 +29,7 @@ export class Map {
         this.enemySpawnAreas = [];
         // These are special properties, player location, shop locations
         this.properties = [];
+        this.tileProperties = {};
         this.playerStartX = 0;
         this.playerStartY = 0;
         for (const layer of mapJson.layers) {
@@ -42,15 +43,49 @@ export class Map {
 
             } else if (layer.type === "objectgroup" && layer.name === "Properties Layer") {
                 for (const object of layer.objects) {
-                    if (HasPropertyName(object.properties, "player-start")) {
-                        this.playerStartX = Math.round(object.x / this.tileWidth);
-                        this.playerStartY = Math.round(object.y / this.tileHeight);
+                    let property = new Property(object, this.tileWidth, this.tileHeight);
+                    this.properties.push(property);
+                    // Now assign the properties to the tiles
+                    for (let x = property.startX; x <= property.endX; x++) {
+                        if (!(x in this.tileProperties)) {
+                            this.tileProperties[x] = {};
+                        }
+                        for (let y = property.startY; y <= property.endY; y++) {
+                            if (!(y in this.tileProperties[x])) {
+                                this.tileProperties[x][y] = []
+                            }
+                            this.tileProperties[x][y].push(property);
+                        }
                     }
                 }
             } else {
                 console.log("Unknown layer: " + layer.name);
             }
         }
+
+        let playerStartProperties = this.getPropertiesByName("player-start");
+        if (playerStartProperties.length > 0) {
+            this.playerStartX = playerStartProperties[0].startX;
+            this.playerStartY = playerStartProperties[0].startY;
+        }
+    }
+    getPropertiesByTile(x, y) {
+        if (!(x in this.tileProperties)) {
+            return [];
+        }
+        if (!(y in this.tileProperties[x])) {
+            return [];
+        }
+        return this.tileProperties[x][y];
+    }
+    getPropertiesByName(propertyName) {
+        let properties = [];
+        for (const property of this.properties) {
+            if (property.name === propertyName) {
+                properties.push(property);
+            }
+        }
+        return properties;
     }
     isCollisionTile(x, y) {
         if (x in this.collisionLayer.tiles) {
@@ -61,13 +96,25 @@ export class Map {
         return false;
     }
 }
-function HasPropertyName(properties, propertyName) {
-    for (const property of properties) {
-        if (property.name === "property" && property.value === propertyName) {
-            return true;
+class Property {
+    constructor(object, tileWidth, tileHeight) {
+        let properties = object.properties;
+        // Properties can span multiple tiles
+        this.startX = Math.round(object.x / tileWidth);
+        this.startY = Math.round(object.y / tileHeight);
+        this.endX = Math.round(object.width / tileWidth) + this.startX - 1;
+        this.endY = Math.round(object.height / tileHeight) + this.startY - 1;
+        // All properties will have a name under "property"
+        // other properties are considered attributes
+        this.attributes = {};
+        for (const property of properties) {
+            if (property.name === "property") {
+                this.name = property.value;
+            } else {
+                this.attributes[property.name] = property.value;
+            }
         }
     }
-    return false;
 }
 class TileLayer {
     constructor(layer) {
