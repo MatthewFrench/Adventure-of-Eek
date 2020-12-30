@@ -68,8 +68,12 @@ export class Game {
         // Starting map is hardcoded
         newGame.currentMap = "Map 1";
         // Should set starting position from the map property
-        newGame.x = this.world.maps[newGame.currentMap].playerStartX;
-        newGame.y = this.world.maps[newGame.currentMap].playerStartY;
+        let map = this.world.maps[newGame.currentMap];
+        let playerStartProperties = map.getPropertiesByName("player-start");
+        if (playerStartProperties.length > 0) {
+            newGame.x = playerStartProperties[0].startX;
+            newGame.y = playerStartProperties[0].startY;
+        }
         this.globalData.currentGame = newGame;
         this.globalData.games.push(newGame);
     }

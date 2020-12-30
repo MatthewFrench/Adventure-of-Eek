@@ -30,8 +30,6 @@ export class Map {
         // These are special properties, player location, shop locations
         this.properties = [];
         this.tileProperties = {};
-        this.playerStartX = 0;
-        this.playerStartY = 0;
         for (const layer of mapJson.layers) {
             if (layer.type === "tilelayer" && layer.name !== "Collision Layer") {
                 this.tileLayers.push(new TileLayer(layer));
@@ -61,12 +59,6 @@ export class Map {
             } else {
                 console.log("Unknown layer: " + layer.name);
             }
-        }
-
-        let playerStartProperties = this.getPropertiesByName("player-start");
-        if (playerStartProperties.length > 0) {
-            this.playerStartX = playerStartProperties[0].startX;
-            this.playerStartY = playerStartProperties[0].startY;
         }
     }
     getPropertiesByTile(x, y) {

@@ -6,7 +6,7 @@ import {CREATURE_BABY_CHICKEN} from "../models/CreatureData.js";
 const TILE_DISPLAY_SIZE = 32;
 const MAP_TILE_WIDTH = 10;
 const MAP_TILE_HEIGHT = 10;
-const MOVE_DELAY_SECONDS = 0.1;
+const MOVE_DELAY_SECONDS = 0.15;
 // Todo, add smooth gliding for character from tile to tile
 export class MainWindow {
     constructor(game) {
