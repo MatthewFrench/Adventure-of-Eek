@@ -11,6 +11,7 @@ const MOVE_DELAY_SECONDS = 0.1;
 export class MainWindow {
     constructor(game) {
         this.game = game;
+        this.viewName = "Main Window";
         this.canvas = document.getElementById("gameview-canvas");
         this.mainTextDiv = document.getElementById("mainTextDiv")
         this.itemsButton = document.getElementById("itemsButton")
@@ -60,6 +61,11 @@ export class MainWindow {
     }
 
     runOverworldLogic(timestamp) {
+        // Don't
+        if (this.game.getCurrentView() !== this.viewName) {
+            return;
+        }
+
         let currentGame = this.game.getCurrentGame();
         let world = this.game.world;
         let map = world.maps[currentGame.currentMap];
@@ -188,10 +194,12 @@ export class MainWindow {
         this.isShowing = true;
         this.updateCanvas();
         requestAnimationFrame((timestamp) => this.updateCanvas(timestamp));
+        this.game.addView(this.viewName);
     }
     hide() {
         this.isShowing = false;
         this.window.style.display = "display: none";
+        this.game.removeView(this.viewName);
     }
     updateDisplay() {
         this.healthDiv.innerText = "Health: " + this.game.getCurrentGame().currentHealth + "/" + this.game.getCurrentGame().health;

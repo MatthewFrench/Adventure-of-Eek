@@ -3,6 +3,7 @@ import {AppendExperience} from "../models/LevelUpData.js";
 export class AttackPopover {
     constructor(game) {
         this.game = game;
+        this.viewName = "Attack Popover";
         this.popover = document.getElementById("attack-popover-background-cover");
         document.getElementById("attack-run-button").onclick = () => {
             this.runClicked();
@@ -303,9 +304,11 @@ export class AttackPopover {
         this.popover.style.display = "";
         this.attackButton.focus();
         this.game.print("A " + enemyCreatureData.name.toLowerCase() +  " attacks! " + enemyCreatureData.encounterLine);
+        this.game.addView(this.viewName);
     }
     hide() {
         this.popover.style.display = "none";
         this.game.mainWindow.updateDisplay();
+        this.game.removeView(this.viewName);
     }
 }

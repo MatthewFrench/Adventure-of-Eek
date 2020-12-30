@@ -1,6 +1,7 @@
 export class CharacterCreatorWindow {
     constructor(game) {
         this.game = game;
+        this.viewName = "Character Creator Window";
         this.window = document.getElementById("character-creator-window");
         this.nameInput = document.getElementById("character-creator-window-name");
         this.goButton = document.getElementById("character-creator-window-go-button");
@@ -44,8 +45,10 @@ export class CharacterCreatorWindow {
     }
     show() {
         this.window.style.display = "";
+        this.game.addView(this.viewName);
     }
     hide() {
         this.window.style.display = "none";
+        this.game.removeView(this.viewName);
     }
 }

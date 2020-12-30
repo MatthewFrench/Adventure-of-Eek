@@ -32,6 +32,26 @@ export class Game {
         this.attackPopover = new AttackPopover(this);
         this.foodShopPopover = new FoodShopPopover(this);
         this.healShopPopover = new HealShopPopover(this);
+        // Tracks what views are shown and in what order
+        this.activeViews = [];
+    }
+
+    addView(view) {
+        // Make sure view only exists once and at the top
+        this.removeView(view);
+        this.activeViews.push(view);
+    }
+    removeView(view) {
+        let index;
+        while ((index = this.activeViews.indexOf(view)) !== -1) {
+            this.activeViews.splice(index, 1);
+        }
+    }
+    getCurrentView() {
+        if (this.activeViews.length === 0) {
+            return "";
+        }
+        return this.activeViews[this.activeViews.length - 1];
     }
 
     createNewGame(name, strength, speed, health) {
