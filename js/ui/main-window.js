@@ -31,9 +31,6 @@ export class MainWindow {
         this.experienceDiv = document.getElementById("main-window-statview-stat-experience")
         this.levelDiv = document.getElementById("main-window-statview-stat-level")
         this.goldDiv = document.getElementById("main-window-statview-stat-gold")
-        document.getElementById("levelUpButton").onclick = () => {
-            AppendExperience(10000, this.game);
-        }
         this.isShowing = false;
         // Should make a better place for this, game resources
         this.mainCharacterImage = new Image();
