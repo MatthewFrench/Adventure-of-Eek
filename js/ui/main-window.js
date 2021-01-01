@@ -161,7 +161,7 @@ export class MainWindow {
             }
             // Check if we moved onto an enemy
             for (const enemy of this.enemies) {
-                if (enemy.x === targetTileX && enemy.y === targetTileY) {
+                if (enemy.x === currentGame.x && enemy.y === currentGame.y) {
                     this.game.attackPopover.show(enemy.creatureData);
                 }
             }
