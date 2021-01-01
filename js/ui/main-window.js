@@ -1,12 +1,14 @@
 import {AppendExperience} from "../models/LevelUpData.js";
 import {ShowArmorShop} from "../models/ArmorData.js";
 import {ShowWeaponShop} from "../models/WeaponData.js";
-import {CREATURE_BABY_CHICKEN} from "../models/CreatureData.js";
+import {CREATURE_BABY_CHICKEN, CREATURES, GetCreatureDataByStringId} from "../models/CreatureData.js";
+import {Enemy} from "../models/Enemy.js";
 
 const TILE_DISPLAY_SIZE = 32;
 const MAP_TILE_WIDTH = 10;
 const MAP_TILE_HEIGHT = 10;
 const MOVE_DELAY_SECONDS = 0.15;
+
 // Todo, add smooth gliding for character from tile to tile
 export class MainWindow {
     constructor(game) {
@@ -25,22 +27,28 @@ export class MainWindow {
             this.game.statsPopover.show();
         }
         this.window = document.getElementById("main-window")
-        this.healthDiv = document.getElementById( "main-window-statview-stat-health")
-        this.experienceDiv = document.getElementById( "main-window-statview-stat-experience")
-        this.levelDiv = document.getElementById( "main-window-statview-stat-level")
-        this.goldDiv = document.getElementById( "main-window-statview-stat-gold")
-        document.getElementById("levelUpButton").onclick = ()  => {
+        this.healthDiv = document.getElementById("main-window-statview-stat-health")
+        this.experienceDiv = document.getElementById("main-window-statview-stat-experience")
+        this.levelDiv = document.getElementById("main-window-statview-stat-level")
+        this.goldDiv = document.getElementById("main-window-statview-stat-gold")
+        document.getElementById("levelUpButton").onclick = () => {
             AppendExperience(10000, this.game);
-        }
-        document.getElementById("attackButton").onclick = () => {
-            this.game.attackPopover.show(CREATURE_BABY_CHICKEN);
         }
         this.isShowing = false;
         // Should make a better place for this, game resources
         this.mainCharacterImage = new Image();
         this.mainCharacterImage.src = "images/main-character.png";
+        // Creature images
+        this.creatureImages = {};
+        for (const creature of CREATURES) {
+            let image = new Image();
+            image.src = "images/" + creature.image;
+            this.creatureImages[creature.stringId] = image;
+        }
         // Time tracking
         this.lastPlayerMove = 0;
+        // Track on screen enemies
+        this.enemies = [];
     }
 
     getContext() {
@@ -60,6 +68,35 @@ export class MainWindow {
         return ctx;
     }
 
+    // Load the enemies in a new area, remove enemies from old area
+    enterArea() {
+        // Remove all previous enemies
+        this.enemies = [];
+        // Add new enemies from new section
+        // Loop through every tile of the new map, add enemies
+        let currentGame = this.game.getCurrentGame();
+        let world = this.game.world;
+        let map = world.maps[currentGame.currentMap];
+        let mapX = Math.floor(currentGame.x / MAP_TILE_WIDTH);
+        let mapY = Math.floor(currentGame.y / MAP_TILE_HEIGHT);
+        let cameraX = mapX * MAP_TILE_WIDTH;
+        let cameraY = mapY * MAP_TILE_HEIGHT;
+        let minX = cameraX;
+        let maxX = cameraX + MAP_TILE_WIDTH;
+        let minY = cameraY;
+        let maxY = cameraY + MAP_TILE_HEIGHT;
+
+        for (let x = minX; x <= maxX; x++) {
+            for (let y = minY; y <= maxY; y++) {
+                let staticEnemies = map.getStaticEnemiesByTile(x, y);
+                for (const staticEnemy of staticEnemies) {
+                    let newEnemy = new Enemy(GetCreatureDataByStringId(staticEnemy.stringId), staticEnemy.x, staticEnemy.y, true);
+                    this.enemies.push(newEnemy);
+                }
+            }
+        }
+    }
+
     runOverworldLogic(timestamp) {
         // Don't
         if (this.game.getCurrentView() !== this.viewName) {
@@ -72,6 +109,8 @@ export class MainWindow {
         // Todo, make a time tracking class for easy
         // world time tracking, like character movement
         const elapsed = timestamp - this.lastPlayerMove;
+        let originalMapX = Math.floor(currentGame.x / MAP_TILE_WIDTH);
+        let originalMapY = Math.floor(currentGame.y / MAP_TILE_HEIGHT);
         if (elapsed > MOVE_DELAY_SECONDS * 1000 && (this.game.eventTracker.up || this.game.eventTracker.left || this.game.eventTracker.down || this.game.eventTracker.right)) {
             let targetTileX = currentGame.x;
             let targetTileY = currentGame.y;
@@ -123,9 +162,21 @@ export class MainWindow {
                     }
                 }
             }
+            // Check if we moved onto an enemy
+            for (const enemy of this.enemies) {
+                if (enemy.x === targetTileX && enemy.y === targetTileY) {
+                    this.game.attackPopover.show(enemy.creatureData);
+                }
+            }
         }
         if (!this.game.eventTracker.up && !this.game.eventTracker.left && !this.game.eventTracker.down && !this.game.eventTracker.right) {
             this.lastPlayerMove = 0;
+        }
+        let newMapX = Math.floor(currentGame.x / MAP_TILE_WIDTH);
+        let newMapY = Math.floor(currentGame.y / MAP_TILE_HEIGHT);
+        // We entered a new area
+        if (originalMapX !== newMapX || originalMapY !== newMapY) {
+            this.enterArea();
         }
     }
 
@@ -182,11 +233,19 @@ export class MainWindow {
                 }
             }
         }
+        // Draw enemies
+        for (const enemy of this.enemies) {
+            let image = this.creatureImages[enemy.creatureData.stringId];
+            let drawX = (enemy.x - cameraX) * TILE_DISPLAY_SIZE;
+            let drawY = (enemy.y - cameraY) * TILE_DISPLAY_SIZE;
+            ctx.drawImage(image, drawX, drawY, TILE_DISPLAY_SIZE, TILE_DISPLAY_SIZE);
+        }
         // Draw main character
         let drawX = (currentGame.x - cameraX) * TILE_DISPLAY_SIZE;
         let drawY = (currentGame.y - cameraY) * TILE_DISPLAY_SIZE;
         ctx.drawImage(this.mainCharacterImage, drawX, drawY, TILE_DISPLAY_SIZE, TILE_DISPLAY_SIZE);
     }
+
     show() {
         this.updateDisplay();
         this.window.style.display = "";
@@ -195,12 +254,15 @@ export class MainWindow {
         this.updateCanvas();
         requestAnimationFrame((timestamp) => this.updateCanvas(timestamp));
         this.game.addView(this.viewName);
+        this.enterArea();
     }
+
     hide() {
         this.isShowing = false;
         this.window.style.display = "display: none";
         this.game.removeView(this.viewName);
     }
+
     updateDisplay() {
         this.healthDiv.innerText = "Health: " + this.game.getCurrentGame().currentHealth + "/" + this.game.getCurrentGame().health;
         this.experienceDiv.innerText = "Experience: " + this.game.getCurrentGame().experience;

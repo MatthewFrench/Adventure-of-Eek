@@ -11,7 +11,7 @@ export class Map {
 
         // [{id, name}]
         this.tileSets = [];
-        for (const tileSet of mapJson.tilesets){
+        for (const tileSet of mapJson.tilesets) {
             // This helps identify corresponding tiles in the map
             let firstGid = tileSet.firstgid;
             let nameSplit = tileSet.source.split("\/");
@@ -24,7 +24,7 @@ export class Map {
         // Collision map
         this.collisionLayer = null;
         // These are specific enemy existence points
-        this.staticEnemies = [];
+        this.staticEnemies = {};
         // These are enemy spawn zones
         this.enemySpawnAreas = [];
         // These are special properties, player location, shop locations
@@ -36,7 +36,16 @@ export class Map {
             } else if (layer.type === "tilelayer" && layer.name === "Collision Layer") {
                 this.collisionLayer = new CollisionLayer(layer);
             } else if (layer.type === "objectgroup" && layer.name === "Enemy Layer") {
-
+                for (const object of layer.objects) {
+                    let enemy = new StaticEnemy(object, this.tileWidth, this.tileHeight)
+                    if (!(enemy.x in this.staticEnemies)) {
+                        this.staticEnemies[enemy.x] = {};
+                    }
+                    if (!(enemy.y in this.staticEnemies[enemy.x])) {
+                        this.staticEnemies[enemy.x][enemy.y] = []
+                    }
+                    this.staticEnemies[enemy.x][enemy.y].push(enemy);
+                }
             } else if (layer.type === "objectgroup" && layer.name === "Enemy Spawn Layer") {
 
             } else if (layer.type === "objectgroup" && layer.name === "Properties Layer") {
@@ -61,6 +70,17 @@ export class Map {
             }
         }
     }
+
+    getStaticEnemiesByTile(x, y) {
+        if (!(x in this.staticEnemies)) {
+            return [];
+        }
+        if (!(y in this.staticEnemies[x])) {
+            return [];
+        }
+        return this.staticEnemies[x][y];
+    }
+
     getPropertiesByTile(x, y) {
         if (!(x in this.tileProperties)) {
             return [];
@@ -70,6 +90,7 @@ export class Map {
         }
         return this.tileProperties[x][y];
     }
+
     getPropertiesByName(propertyName) {
         let properties = [];
         for (const property of this.properties) {
@@ -79,6 +100,7 @@ export class Map {
         }
         return properties;
     }
+
     isCollisionTile(x, y) {
         if (x in this.collisionLayer.tiles) {
             if (this.collisionLayer.tiles[x][y]) {
@@ -88,6 +110,23 @@ export class Map {
         return false;
     }
 }
+
+class StaticEnemy {
+    constructor(object, tileWidth, tileHeight) {
+        // Set enemy tile x/y
+        this.x = Math.round(object.x / tileWidth);
+        this.y = Math.round(object.y / tileHeight);
+        this.stringId = object.name;
+        this.attributes = {};
+        let properties = object.properties;
+        if (properties !== undefined) {
+            for (const property of properties) {
+                this.attributes[property.name] = property.value;
+            }
+        }
+    }
+}
+
 class Property {
     constructor(object, tileWidth, tileHeight) {
         let properties = object.properties;
@@ -108,6 +147,7 @@ class Property {
         }
     }
 }
+
 class TileLayer {
     constructor(layer) {
         this.name = layer.name;
@@ -138,6 +178,7 @@ class TileLayer {
             }
         }
     }
+
     putTile(x, y, id) {
         if (!(x in this.tiles)) {
             this.tiles[x] = {};
@@ -145,6 +186,7 @@ class TileLayer {
         this.tiles[x][y] = id;
     }
 }
+
 class CollisionLayer {
     constructor(layer) {
         this.name = layer.name;
@@ -172,6 +214,7 @@ class CollisionLayer {
             }
         }
     }
+
     putCollision(x, y) {
         if (!(x in this.tiles)) {
             this.tiles[x] = {};
