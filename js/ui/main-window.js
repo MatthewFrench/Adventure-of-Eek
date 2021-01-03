@@ -95,7 +95,6 @@ export class MainWindow {
     }
 
     runOverworldLogic(timestamp) {
-        // Don't
         if (this.game.getCurrentView() !== this.viewName) {
             return;
         }
@@ -162,7 +161,12 @@ export class MainWindow {
             // Check if we moved onto an enemy
             for (const enemy of this.enemies) {
                 if (enemy.x === currentGame.x && enemy.y === currentGame.y) {
-                    this.game.attackPopover.show(enemy.creatureData);
+                    this.game.attackPopover.show(enemy.creatureData, () => {
+                        // Any special victory actions
+                    }, () => {
+                        currentGame.currentHealth = 1;
+                        this.game.setCurrentGamePositionToStartPosition();
+                    });
                 }
             }
         }

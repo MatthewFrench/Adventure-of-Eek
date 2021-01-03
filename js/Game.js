@@ -56,6 +56,7 @@ export class Game {
 
     createNewGame(name, strength, speed, health) {
         let newGame = new GameData();
+        this.globalData.currentGame = newGame;
         newGame.name = name;
         newGame.strength = parseInt(strength);
         newGame.speed = parseInt(speed);
@@ -65,17 +66,21 @@ export class Game {
         newGame.gold = 100;
         newGame.items.push(ITEM_SUSHI);
         newGame.items.push(ITEM_SUSHI);
+        this.setCurrentGamePositionToStartPosition();
+        this.globalData.games.push(newGame);
+    }
+
+    setCurrentGamePositionToStartPosition() {
+        let currentGame = this.globalData.currentGame;
         // Starting map is hardcoded
-        newGame.currentMap = "Map 1";
+        currentGame.currentMap = "Map 1";
         // Should set starting position from the map property
-        let map = this.world.maps[newGame.currentMap];
+        let map = this.world.maps[currentGame.currentMap];
         let playerStartProperties = map.getPropertiesByName("player-start");
         if (playerStartProperties.length > 0) {
-            newGame.x = playerStartProperties[0].startX;
-            newGame.y = playerStartProperties[0].startY;
+            currentGame.x = playerStartProperties[0].startX;
+            currentGame.y = playerStartProperties[0].startY;
         }
-        this.globalData.currentGame = newGame;
-        this.globalData.games.push(newGame);
     }
 
     getCurrentGame() {
