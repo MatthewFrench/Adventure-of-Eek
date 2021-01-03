@@ -163,6 +163,7 @@ export class MainWindow {
                 if (enemy.x === currentGame.x && enemy.y === currentGame.y) {
                     this.game.attackPopover.show(enemy.creatureData, () => {
                         // Any special victory actions
+                        this.enemies.splice(this.enemies.indexOf(enemy), 1);
                     }, () => {
                         currentGame.currentHealth = 1;
                         this.game.setCurrentGamePositionToStartPosition();
